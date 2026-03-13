@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Verificación de Certificados</title>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
+<style>
+
+/* ------------------ GENERAL ------------------ */
+
+body{
+margin:0;
+font-family:Arial, Helvetica, sans-serif;
+background:linear-gradient(135deg,#ff2b2b,#d5dbb2);
+color:#070000;
+}
+
+/* ------------------ BUSCADOR ------------------ */
+
+main{
+padding:60px 20px;
+text-align:center;
+}
+
+.buscador{
+background:white;
+padding:30px;
+border-radius:10px;
+max-width:420px;
+margin:auto;
+box-shadow:0 8px 30px rgba(0,0,0,0.2);
+}
+
+input{
+width:85%;
+padding:12px;
+border-radius:6px;
+border:1px solid #360d0d;
+font-size:16px;
+}
+
+button{
+margin-top:15px;
+padding:12px 28px;
+border:none;
+background:#2b7cff;
+color:white;
+font-size:16px;
+border-radius:6px;
+cursor:pointer;
+}
+
+button:hover{
+background:#174fb7;
+}
+
+/* ------------------ CERTIFICADOS ------------------ */
+
+.certificados{
+margin-top:40px;
+display:flex;
+flex-wrap:wrap;
+gap:20px;
+justify-content:center;
+}
+
+.card{
+background:white;
+padding:20px;
+border-radius:10px;
+width:260px;
+box-shadow:0 5px 20px rgba(0,0,0,0.2);
+}
+
+.estado{
+margin-top:10px;
+font-weight:bold;
+}
+
+.ok{color:#28a745;}
+.error{color:red;}
+.buscando{color:#555;}
+
+.descargar{
+display:none;
+margin-top:15px;
+padding:10px 15px;
+background:#28a745;
+color:white;
+text-decoration:none;
+border-radius:5px;
+font-weight:bold;
+}
+
+/* ------------------ AFILIADOS ------------------ */
+
+.afiliados{
+background:linear-gradient(to right,#371f22,#4d0808);
+color:white;
+padding:60px 20px;
+}
+
+.afiliados-title{
+text-align:center;
+letter-spacing:6px;
+font-size:32px;
+margin-bottom:40px;
+}
+
+.afiliados-grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:40px;
+max-width:1100px;
+margin:auto;
+}
+
+.afiliados-grid ul{
+list-style:none;
+padding:0;
+}
+
+.afiliados-grid li{
+margin-bottom:8px;
+}
+
+.afiliados-grid a{
+color:#e6c378;
+text-decoration:none;
+}
+
+.afiliados-grid a:hover{
+text-decoration:underline;
+}
+
+.afiliados-footer{
+text-align:right;
+margin-top:40px;
+font-size:18px;
+opacity:.8;
+}
+
+/* ------------------ FOOTER ------------------ */
+
+.footer{
+background:rgb(4, 7, 43);
+color:rgb(202, 210, 226);
+padding:20px 40px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+flex-wrap:wrap;
+}
+
+/* COLORES OFICIALES */
+
+.bi-facebook{color:#1877F2;}
+.bi-tiktok{color:#ffffff;}
+.bi-youtube{color:#FF0000;}
+.bi-telegram{color:#0088cc;}
+.bi-whatsapp{color:#25D366;}
+.bi-instagram{color:#E4405F;}
+
+.footer-right a{
+color:white;
+margin-left:18px;
+font-size:22px;
+text-decoration:none;
+opacity:1;
+transition:0.3s;
+}
+
+.footer-right a:hover{
+transform:scale(1.2);
+}
+
+/* ------------------ RESPONSIVE MOVIL ------------------ */
+@media (max-width: 768px){
+
+main{
+padding:40px 15px;
+}
+
+/* BUSCADOR */
+
+.buscador{
+max-width:100%;
+padding:25px;
+}
+
+input{
+width:100%;
+font-size:18px;
+}
+
+button{
+width:100%;
+font-size:18px;
+padding:14px;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- ---------------- BUSCADOR ---------------- -->
+
+<main>
+
+<div class="buscador">
+
+<h2>Verificar Certificados</h2>
+
+<input type="text" id="ci" placeholder="Ingrese su CI">
+
+<br>
+
+<button onclick="buscar()">Buscar Certificados</button>
+
+</div>
+
+<div class="certificados">
+
+<div class="card">
+<h3>Análisis D.S.5503</h3>
+<div id="estado1" class="estado"></div>
+<a id="link1" class="descargar" target="_blank">Descargar Certificado</a>
+</div>
+
+<div class="card">
+<h3>Rol Sindical</h3>
+<div id="estado2" class="estado"></div>
+<a id="link2" class="descargar" target="_blank">Descargar Certificado</a>
+</div>
+
+<div class="card">
+<h3>Frente al D.S.5503</h3>
+<div id="estado3" class="estado"></div>
+<a id="link3" class="descargar" target="_blank">Descargar Certificado</a>
+</div>
+
+</div>
+
+</main>
+
+
+<!-- ---------------- AFILIADOS ---------------- -->
+
+<section class="afiliados">
+
+<h2 class="afiliados-title">AFILIADOS</h2>
+
+<div class="afiliados-grid">
+
+<ul>
+<li><a href="#">LA PAZ</a></li>
+<li><a href="#">ORURO</a></li>
+<li><a href="#">COCHABAMBA</a></li>
+<li><a href="#">POTOSI</a></li>
+<li><a href="#">TARIJA</a></li>
+<li><a href="#">SANTA CRUZ</a></li>
+<li><a href="#">BENI</a></li>
+<li><a href="#">CHUQUISACA</a></li>
+<li><a href="#">PANDO</a></li>
+<li><a href="#">ANDRÉS IBÁÑEZ</a></li>
+<li><a href="#">UYUNI</a></li>
+</ul>
+
+<ul>
+<li><a href="#">AIQUIQUE</a></li>
+<li><a href="#">ATOCHA</a></li>
+<li><a href="#">CINTIS</a></li>
+<li><a href="#">BALLIVIÁN</a></li>
+<li><a href="#">BERMEJO</a></li>
+<li><a href="#">CHIQUITANIA</a></li>
+<li><a href="#">CORDILLERA</a></li>
+<li><a href="#">RIBERALTA</a></li>
+<li><a href="#">ROBORÉ</a></li>
+<li><a href="#">TUPIZA</a></li>
+</ul>
+
+<ul>
+<li><a href="#">PUERTO SUÁREZ</a></li>
+<li><a href="#">CHACO CHAQUEÑO</a></li>
+<li><a href="#">GUAYARAMERÍN</a></li>
+<li><a href="#">VILLAMONTES</a></li>
+<li><a href="#">VALLEGRANDE</a></li>
+<li><a href="#">VILLAZÓN</a></li>
+<li><a href="#">YACUIBA</a></li>
+<li><a href="#">MAGDALENA</a></li>
+<li><a href="#">NORTE CRUCEÑO</a></li>
+<li><a href="#">UNCÍA</a></li>
+</ul>
+
+</div>
+
+<div class="afiliados-footer">
+31 FEDERACIONES Y MÁS DE <strong>25K AFILIADOS</strong>
+</div>
+
+</section>
+
+
+<!-- ---------------- FOOTER ---------------- -->
+
+<footer class="footer">
+
+<div>
+Desarrollado por la C.T.E.U.B. © 2026 - Todos los derechos reservados
+</div>
+
+<div class="footer-right">
+
+<a href="#"><i class="bi bi-facebook"></i></a>
+<a href="#"><i class="bi bi-tiktok"></i></a>
+<a href="#"><i class="bi bi-youtube"></i></a>
+<a href="#"><i class="bi bi-telegram"></i></a>
+<a href="#"><i class="bi bi-whatsapp"></i></a>
+<a href="#"><i class="bi bi-instagram"></i></a>
+
+</div>
+
+</footer>
+
+
+<script>
+
+const certificados=[
+
+{
+url:"URL_CSV_1",
+estado:"estado1",
+link:"link1"
+},
+
+{
+url:"URL_CSV_2",
+estado:"estado2",
+link:"link2"
+},
+
+{
+url:"URL_CSV_3",
+estado:"estado3",
+link:"link3"
+}
+
+];
+
+async function buscar(){
+
+let ci=document.getElementById("ci").value.trim();
+
+if(ci===""){
+alert("Ingrese su CI");
+return;
+}
+
+for(let cert of certificados){
+
+document.getElementById(cert.estado).innerHTML="<span class='buscando'>Buscando certificado...</span>";
+document.getElementById(cert.link).style.display="none";
+
+try{
+
+let r=await fetch(cert.url);
+let data=await r.text();
+let filas=data.split(/\r?\n/);
+
+let encontrado=false;
+
+for(let i=1;i<filas.length;i++){
+
+let c=filas[i].split(",");
+
+if(ci===c[0]){
+
+document.getElementById(cert.estado).innerHTML="<span class='ok'>✔ Certificado encontrado</span>";
+
+let btn=document.getElementById(cert.link);
+
+btn.href=c[1];
+btn.style.display="inline-block";
+
+encontrado=true;
+break;}
+}
+if(!encontrado){
+document.getElementById(cert.estado).innerHTML="<span class='error'>No se encontró certificado</span>";}
+}catch{
+document.getElementById(cert.estado).innerHTML="<span class='error'>Error consultando base de datos</span>";}
+}
+}
+
+</script>
+
+
+</body>
+</html>
