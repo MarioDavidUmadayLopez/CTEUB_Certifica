@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Portal de Certificados</title>
+
+<style>
+
+/* ---------- ESTILO GENERAL ---------- */
+
+body{
+margin:0;
+font-family:Arial, sans-serif;
+background:linear-gradient(135deg,#2b7cff,#00c6ff);
+min-height:100vh;
+display:flex;
+flex-direction:column;
+}
+
+/* HEADER */
+
+header{
+background:#1b2a4e;
+color:white;
+padding:20px;
+text-align:center;
+font-size:22px;
+font-weight:bold;
+}
+
+/* MAIN */
+
+main{
+flex:1;
+padding:40px;
+text-align:center;
+}
+
+/* BUSCADOR */
+
+.buscador{
+background:white;
+padding:25px;
+border-radius:10px;
+box-shadow:0 5px 20px rgba(0,0,0,0.2);
+max-width:400px;
+margin:auto;
+}
+
+input{
+width:85%;
+padding:12px;
+border-radius:6px;
+border:1px solid #ccc;
+font-size:16px;
+margin-top:10px;
+}
+
+button{
+
+margin-top:12px;
+
+padding:12px 25px;
+
+border:none;
+
+background:#2b7cff;
+
+color:white;
+
+font-size:16px;
+
+border-radius:6px;
+
+cursor:pointer;
+
+}
+
+button:hover{
+background:#174fb7;
+}
+
+/* SPINNER */
+
+.spinner{
+
+display:none;
+
+margin-top:15px;
+
+}
+
+.loader{
+
+border:4px solid #f3f3f3;
+
+border-top:4px solid #2b7cff;
+
+border-radius:50%;
+
+width:30px;
+
+height:30px;
+
+animation:spin 1s linear infinite;
+
+margin:auto;
+
+}
+
+@keyframes spin{
+
+0%{transform:rotate(0deg);}
+100%{transform:rotate(360deg);}
+
+}
+
+/* CERTIFICADOS */
+
+.certificados{
+
+margin-top:40px;
+
+display:flex;
+
+flex-wrap:wrap;
+
+justify-content:center;
+
+gap:20px;
+
+}
+
+.card{
+
+background:white;
+
+width:300px;
+
+border-radius:10px;
+
+box-shadow:0 5px 20px rgba(0,0,0,0.2);
+
+padding:20px;
+
+text-align:left;
+
+}
+
+.card h3{
+
+margin-top:0;
+
+}
+
+.estado{
+
+font-weight:bold;
+
+margin-top:10px;
+
+}
+
+.ok{
+color:#28a745;
+}
+
+.error{
+color:red;
+}
+
+.datos{
+
+margin-top:10px;
+
+font-size:14px;
+
+}
+
+.preview{
+
+width:100%;
+
+margin-top:10px;
+
+display:none;
+
+border-radius:5px;
+
+}
+
+.descargar{
+
+display:none;
+
+margin-top:10px;
+
+padding:10px 15px;
+
+background:#28a745;
+
+color:white;
+
+text-decoration:none;
+
+border-radius:6px;
+
+}
+
+/* FOOTER */
+
+footer{
+
+background:#1b2a4e;
+
+color:white;
+
+text-align:center;
+
+padding:15px;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+Portal Oficial de Verificación de Certificados
+
+</header>
+
+<main>
+
+<div class="buscador">
+
+<h3>Ingrese su CI</h3>
+
+<input type="text" id="ci" placeholder="Ej: 7212809">
+
+<br>
+
+<button onclick="buscar()">Buscar Certificados</button>
+
+<div class="spinner" id="spinner">
+<div class="loader"></div>
+</div>
+
+</div>
+
+
+<div class="certificados">
+
+<!-- CERT 1 -->
+
+<div class="card">
+
+<h3>Análisis e Impacto del D.S.5503</h3>
+
+<div id="estado1" class="estado"></div>
+
+<div id="datos1" class="datos"></div>
+
+<img id="preview1" class="preview">
+
+<a id="link1" class="descargar" target="_blank">
+Descargar Certificado
+</a>
+
+</div>
+
+<!-- CERT 2 -->
+
+<div class="card">
+
+<h3>El Verdadero Rol Sindical</h3>
+
+<div id="estado2" class="estado"></div>
+
+<div id="datos2" class="datos"></div>
+
+<img id="preview2" class="preview">
+
+<a id="link2" class="descargar" target="_blank">
+Descargar Certificado
+</a>
+
+</div>
+
+<!-- CERT 3 -->
+
+<div class="card">
+
+<h3>Frente al D.S.5503</h3>
+
+<div id="estado3" class="estado"></div>
+
+<div id="datos3" class="datos"></div>
+
+<img id="preview3" class="preview">
+
+<a id="link3" class="descargar" target="_blank">
+Descargar Certificado
+</a>
+
+</div>
+
+</div>
+
+</main>
+
+<footer>
+
+Sistema de certificados © 2026
+
+</footer>
+
+
+<script>
+
+const certificados=[
+
+{
+url:"https://docs.google.com/spreadsheets/d/e/2PACX-1vQBwaV8MukiuNrmX2wh-JUBjmbimI1mgF7adnuMdWxajvQ2-jvvWYi9uKn_EyqZk3kFyYKam8yGq7V_/pub?gid=0&single=true&output=csv",
+estado:"estado1",
+datos:"datos1",
+link:"link1",
+preview:"preview1"
+},
+
+{
+url:"https://docs.google.com/spreadsheets/d/e/2PACX-1vQhNPw-DqY-NEUmbfVz00JBcZnZIHifOaSFF-MQ_BDiT288bcGMXF6-gdj-5j0YPgzVceWil_Qhkk8z/pub?gid=832962079&single=true&output=csv",
+estado:"estado2",
+datos:"datos2",
+link:"link2",
+preview:"preview2"
+},
+
+{
+url:"https://docs.google.com/spreadsheets/d/e/2PACX-1vSSJjexwsV7Qph7wLj_Y3gBEK4LU_Au7C8a_g2L4uV-GdoDDeff-iFYhG9gVzMhvLOJniaZBmGz7Cie/pub?gid=0&single=true&output=csv",
+estado:"estado3",
+datos:"datos3",
+link:"link3",
+preview:"preview3"
+}
+
+];
+
+
+async function buscar(){
+
+let ci=document.getElementById("ci").value.trim();
+
+if(ci===""){
+alert("Ingrese su CI");
+return;
+}
+
+document.getElementById("spinner").style.display="block";
+
+for(let cert of certificados){
+
+document.getElementById(cert.estado).innerHTML="Buscando...";
+document.getElementById(cert.link).style.display="none";
+document.getElementById(cert.preview).style.display="none";
+
+try{
+
+let response=await fetch(cert.url);
+let data=await response.text();
+
+let filas=data.split(/\r?\n/);
+
+let encontrado=false;
+
+for(let i=1;i<filas.length;i++){
+
+let c=filas[i].split(",");
+
+let ciTabla=c[0]?.replace(/"/g,'').trim();
+
+if(ci===ciTabla){
+
+let nombre=c[1];
+let curso=c[2];
+let fecha=c[3];
+let link=c[4];
+
+document.getElementById(cert.estado).innerHTML="<span class='ok'>✔ Certificado encontrado</span>";
+
+document.getElementById(cert.datos).innerHTML=
+
+"Nombre: "+nombre+"<br>"+
+"Curso: "+curso+"<br>"+
+"Fecha: "+fecha;
+
+let boton=document.getElementById(cert.link);
+
+boton.href=link;
+
+boton.style.display="inline-block";
+
+let preview=document.getElementById(cert.preview);
+
+preview.src=link;
+
+preview.style.display="block";
+
+encontrado=true;
+
+break;
+
+}
+
+}
+
+if(!encontrado){
+
+document.getElementById(cert.estado).innerHTML="<span class='error'>No se encontró certificado</span>";
+
+document.getElementById(cert.datos).innerHTML="";
+
+}
+
+}catch{
+
+document.getElementById(cert.estado).innerHTML="<span class='error'>Error consultando base de datos</span>";
+
+}
+
+}
+
+document.getElementById("spinner").style.display="none";
+
+}
+
+</script>
+
+</body>
+</html>
