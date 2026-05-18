@@ -255,6 +255,7 @@ background:rgba(255,255,255,0.15);}
 </head>
 
 <body>
+<!-- ---------------- Certificados 2025 ---------------- -->    
 <!-- ---------------- BUSCADOR ---------------- -->
 
 <section class="separador-img">
@@ -320,6 +321,55 @@ background:rgba(255,255,255,0.15);}
     </div>
 </main>
 
+<!----------------------------------------Certificados 2026-------------------------------->
+<!-- ---------------- BUSCADOR ---------------- -->
+<section class="separador-img">
+<img src="Federaciones.jpeg" alt="Banner institucional">
+</section>
+
+<main>
+    <div class="buscadores">
+         <div class="buscador">
+         <h2>Certificados para Maestros</h2>
+         <input type="text" id="RDA" placeholder="Ingrese su RDA">
+         <br>
+         <button onclick="buscar()">Buscar Certificados</button>
+        </div>
+    </div>
+
+
+<div class="certificados">
+
+<div class="card">
+<img src="TallVrt1.png" class="cert-img">
+<h3>¿Qué voz tiene el pueblo?</h3>
+<div id="estado1" class="estado"></div>
+<a id="link1" class="descargar" target="_blank">Descargar Certificado</a>
+</div>
+
+<div class="card">
+<img src="TallVrt2.png" class="cert-img">
+<h3>Educación: ¿Derecho o Privatización?</h3>
+<div id="estado2" class="estado"></div>
+<a id="link2" class="descargar" target="_blank">Descargar Certificado</a>
+</div>
+
+<div class="card">
+<img src="TallVrt3png.jpeg" class="cert-img">
+<h3>Impuestos a la Vida ¿Por qué el dinero no alcanza en Bolivia?</h3>
+<div id="estado3" class="estado"></div>
+<a id="link3" class="descargar" target="_blank">Descargar Certificado</a>
+</div>
+
+<div class="card">
+<img src="TallVrt4png.jpeg" class="cert-img">
+<h3>¿Cómo conseguir dólares para combustible?</h3>
+<div id="estado3" class="estado"></div>
+<a id="link4" class="descargar" target="_blank">Descargar Certificado</a>
+</div>
+
+
+    
 <!-- ---------------- AFILIADOS ---------------- -->
 
 <section class="afiliados">
@@ -423,7 +473,7 @@ try{
     let c=filas[i].split(",");
     if(ci===c[0]){
 
-    document.getElementById(cert.estado).innerHTML="<span class='ok'>✔ Certificado encontrado</span>";
+    document.getElementById(cert.estado).innerHTML="<span class='ok'>✔ SI ASISTI</span>";
     let btn=document.getElementById(cert.link);
     btn.href=c[1];
     btn.style.display="inline-block";
@@ -466,7 +516,7 @@ let c=filas[i].split(",");
 
 if(celular===c[0]){
 
-document.getElementById(expositor.estado).innerHTML="<span class='ok'>✔ SI ASISTI</span>";
+document.getElementById(expositor.estado).innerHTML="<span class='ok'>✔ Certificado Encontrado</span>";
 
 let btn=document.getElementById(expositor.link);
 btn.href=c[1];
