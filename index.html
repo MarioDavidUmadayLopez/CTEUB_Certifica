@@ -267,7 +267,7 @@ background:rgba(255,255,255,0.15);}
          <h2>Certificados para Maestros</h2>
          <input type="text" id="RDA" placeholder="Ingrese su RDA">
          <br>
-         <button onclick="buscar()">Buscar Certificados</button>
+         <button onclick="buscarRDA()">Buscar Certificados</button>
         </div>
     </div>
 
@@ -277,28 +277,28 @@ background:rgba(255,255,255,0.15);}
 <div class="card">
 <img src="TallVrt1.png" class="cert-img">
 <h3>¿Qué voz tiene el pueblo?</h3>
-<div id="estado1" class="estado"></div>
+<div id="estado4" class="estado"></div>
 <a id="link4" class="descargar" target="_blank">Descargar Certificado</a>
 </div>
 
 <div class="card">
 <img src="TallVrt2.png" class="cert-img">
 <h3>Educación: ¿Derecho o Privatización?</h3>
-<div id="estado2" class="estado"></div>
+<div id="estado5" class="estado"></div>
 <a id="link5" class="descargar" target="_blank">Descargar Certificado</a>
 </div>
 
 <div class="card">
 <img src="TallVrt3.png" class="cert-img">
 <h3>Impuestos a la Vida ¿Por qué el dinero no alcanza en Bolivia?</h3>
-<div id="estado3" class="estado"></div>
+<div id="estado6" class="estado"></div>
 <a id="link6" class="descargar" target="_blank">Descargar Certificado</a>
 </div>
 
 <div class="card">
 <img src="TallVrt4.png" class="cert-img">
 <h3>¿Cómo conseguir dólares para combustible?</h3>
-<div id="estado3" class="estado"></div>
+<div id="estado7" class="estado"></div>
 <a id="link7" class="descargar" target="_blank">Descargar Certificado</a>
 </div>
 <!-- CARD SOLICITUD -->
@@ -377,100 +377,103 @@ try{
         const expositor = {
 url:"https://docs.google.com/spreadsheets/d/e/2PACX-1vTpANP1P2QgkW_RG_4FBWcrLjapeje1iVG5NSgzIaRtiyujaQi3ShYJFFntwtJSoZYQfBECG17NXtFo/pub?gid=561352925&single=true&output=csv",estado:"estadoExpositor",link:"linkExpositor"};
 async function buscarExpositor(){
-
 let celular=document.getElementById("celular").value.trim();
-
 if(celular===""){
 alert("Ingrese su número de celular");
 return;
 }
-
 document.getElementById(expositor.estado).innerHTML="<span class='buscando'>Buscando certificado...</span>";
 document.getElementById(expositor.link).style.display="none";
-
 try{
-
 let r=await fetch(expositor.url);
 let data=await r.text();
 let filas=data.split(/\r?\n/);
-
 let encontrado=false;
-
 for(let i=1;i<filas.length;i++){
-
 let c=filas[i].split(",");
 
 if(celular===c[0]){
 
 document.getElementById(expositor.estado).innerHTML="<span class='ok'>✔ Certificado Encontrado</span>";
-
 let btn=document.getElementById(expositor.link);
 btn.href=c[1];
 btn.style.display="inline-block";
-
 encontrado=true;
 break;
-
 }
-
 }
-
 if(!encontrado){
 document.getElementById(expositor.estado).innerHTML="<span class='error'>No se encontró certificado</span>";
 }
-
 }catch{
-
 document.getElementById(expositor.estado).innerHTML="<span class='error'>Error consultando base de datos</span>";
-
 }
-
 }
 </script>
-
-<script>
-    const certificados=[
-        {url:"https://docs.google.com/spreadsheets/d/1LwpANUb6wZIRy9IqgJ7AgPnxg7NlC9HyAZXh0_j3bVM/edit?usp=sharing",estado:"estado4",link:"link4"},
-        {url:"https://docs.google.com/spreadsheets/d/1IBriY6fA1iqCuaLEiI3HKfQC2p6izCaMVCUD8HmY0ME/edit?usp=sharing",estado:"estado5",link:"link5"},
-        {url:"https://docs.google.com/spreadsheets/d/1FV5dFFXx6CAVpIHPc6rlNlDrO2gb9cCvGbXELVRjEKU/edit?usp=sharing",estado:"estado6",link:"link6"},
-        {url:"https://docs.google.com/spreadsheets/d/1-4Ixz0D28gGsUetuERm5y61t6Mf6rzSd6yYeLAgBJcc/edit?usp=sharing",estado:"estado7",link:"link7"}
-    ];
-
-    async function buscar(){
-    let RDA=document.getElementById("RDA").value.trim();
-    if(RDA===""){
-    alert("Ingrese su RDA");
-    return;
-    }
     
-    for(let cert of certificados){
-    document.getElementById(cert.estado).innerHTML="<span class='buscando'>Buscando certificado...</span>";
-    document.getElementById(cert.link).style.display="none";
+<!--script 2026-->
+<script>
+const certificadosRDA = [
+{
+url:"https://docs.google.com/spreadsheets/d/e/TU_LINK_1/pub?output=csv",
+estado:"estado4",
+link:"link4"
+},
+{
+url:"https://docs.google.com/spreadsheets/d/e/TU_LINK_2/pub?output=csv",
+estado:"estado5",
+link:"link5"
+},
+{
+url:"https://docs.google.com/spreadsheets/d/e/TU_LINK_3/pub?output=csv",
+estado:"estado6",
+link:"link6"
+},
+{
+url:"https://docs.google.com/spreadsheets/d/e/TU_LINK_4/pub?output=csv",
+estado:"estado7",
+link:"link7"
+}
+];
 
+async function buscarRDA(){
+let RDA=document.getElementById("RDA").value.trim();
+if(RDA===""){
+alert("Ingrese su RDA");
+return;
+}
+for(let cert of certificadosRDA){
+document.getElementById(cert.estado).innerHTML =
+"<span class='buscando'>Buscando certificado...</span>";
+document.getElementById(cert.link).style.display="none";
 try{
-    let r=await fetch(cert.url);
-    let data=await r.text();
-    let filas=data.split(/\r?\n/);
-
-    let encontrado=false;
-    for(let i=1;i<filas.length;i++){
-    let c=filas[i].split(",");
-    if(RDA===c[0]){
-
-    document.getElementById(cert.estado).innerHTML="<span class='ok'>✔ SI ASISTI</span>";
-    let btn=document.getElementById(cert.link);
-    btn.href=c[1];
-    btn.style.display="inline-block";
-    encontrado=true;
-    break;}
+let r=await fetch(cert.url);
+let data=await r.text();
+let filas=data.split(/\r?\n/);
+let encontrado=false;
+for(let i=1;i<filas.length;i++){
+let c=filas[i].split(",");
+if(RDA===c[0]){
+document.getElementById(cert.estado).innerHTML =
+"<span class='ok'>✔ SI ASISTI</span>";
+let btn=document.getElementById(cert.link);
+btn.href=c[1];
+btn.style.display="inline-block";
+encontrado=true;
+break;
     }
+}
+if(!encontrado){
 
-        if(!encontrado){
-         document.getElementById(cert.estado).innerHTML="<span class='error'>No se encontró certificado</span>";}
-        }catch{
-         document.getElementById(cert.estado).innerHTML="<span class='error'>Error consultando base de datos</span>";}
-         }
-        }
+document.getElementById(cert.estado).innerHTML =
+"<span class='error'>No se encontró certificado</span>";
+}
+}catch{
+
+document.getElementById(cert.estado).innerHTML =
+"<span class='error'>Error consultando base de datos</span>";}
+    }
+}
 </script>
     </body>
 </html>
