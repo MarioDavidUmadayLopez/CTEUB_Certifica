@@ -437,8 +437,8 @@ document.getElementById(expositor.estado).innerHTML="<span class='error'>Error c
     ];
 
     async function buscar(){
-    let ci=document.getElementById("RDA").value.trim();
-    if(ci===""){
+    let RDA=document.getElementById("RDA").value.trim();
+    if(RDA===""){
     alert("Ingrese su RDA");
     return;
     }
@@ -455,7 +455,7 @@ try{
     let encontrado=false;
     for(let i=1;i<filas.length;i++){
     let c=filas[i].split(",");
-    if(ci===c[0]){
+    if(RDA===c[0]){
 
     document.getElementById(cert.estado).innerHTML="<span class='ok'>✔ SI ASISTI</span>";
     let btn=document.getElementById(cert.link);
