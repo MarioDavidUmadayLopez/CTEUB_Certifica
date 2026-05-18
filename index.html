@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -123,7 +122,6 @@ margin-left:auto;
 margin-right:auto;}
 
 /* ------------------ CARD SOLICITUD ------------------ */
-
 /* CARD SOLICITUD ANCHO COMPLETO */
 .solicitud{
 grid-column:1 / -1;
@@ -146,46 +144,6 @@ transition:.3s;}
 .btn-solicitud:hover{
 background:#e68900;
 transform:scale(1.05);}
-
-/* ------------------ AFILIADOS ------------------ */
-
-.afiliados{
-background:linear-gradient(to right,#371f22,#4d0808);
-color:white;
-padding:60px 20px;}
-
-.afiliados-title{
-text-align:center;
-letter-spacing:6px;
-font-size:32px;
-margin-bottom:40px;}
-
-.afiliados-grid{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:40px;
-max-width:1100px;
-margin:auto;}
-
-.afiliados-grid ul{
-list-style:none;
-padding:0;}
-
-.afiliados-grid li{
-margin-bottom:8px;}
-
-.afiliados-grid a{
-color:#f3f3f3;
-text-decoration:none;}
-
-.afiliados-grid a:hover{
-text-decoration:underline;}
-
-.afiliados-footer{
-text-align:right;
-margin-top:40px;
-font-size:18px;
-opacity:.8;}
 
 /* ------------------ FOOTER ------------------ */
 .footer{ /* General */
@@ -246,6 +204,7 @@ background:rgba(255,255,255,0.15);}
     </style>
 </head>
 <body>
+    
 <!-- ---------------- Certificados 2025 ---------------- -->    
 <!-- ---------------- BUSCADOR ---------------- -->
 
@@ -273,28 +232,29 @@ background:rgba(255,255,255,0.15);}
     </div>
 
 
-<div class="certificados">
+    <div class="certificados">
 
-<div class="card">
-<img src="certificado1.jpeg" class="cert-img">
-<h3>Análisis e Impacto del D.S. 5503</h3>
-<div id="estado1" class="estado"></div>
-<a id="link1" class="descargar" target="_blank">Descargar Certificado</a>
-</div>
+        <div class="card">
+         <img src="certificado1.jpeg" class="cert-img">
+         <h3>Análisis e Impacto del D.S. 5503</h3>
+         <div id="estado1" class="estado"></div>
+         <a id="link1" class="descargar" target="_blank">Descargar Certificado</a>
+        </div>
 
-<div class="card">
-<img src="certificado2.jpeg" class="cert-img">
-<h3>El Verdadero Rol Sindical</h3>
-<div id="estado2" class="estado"></div>
-<a id="link2" class="descargar" target="_blank">Descargar Certificado</a>
-</div>
+        <div class="card">
+         <img src="certificado2.jpeg" class="cert-img">
+         <h3>El Verdadero Rol Sindical</h3>
+         <div id="estado2" class="estado"></div>
+         <a id="link2" class="descargar" target="_blank">Descargar Certificado</a>
+        </div>
 
-<div class="card">
-<img src="certificado3.jpeg" class="cert-img">
-<h3>Frente al D.S.5503</h3>
-<div id="estado3" class="estado"></div>
-<a id="link3" class="descargar" target="_blank">Descargar Certificado</a>
-</div>
+        <div class="card">
+         <img src="certificado3.jpeg" class="cert-img">
+         <h3>Frente al D.S.5503</h3>
+         <div id="estado3" class="estado"></div>
+         <a id="link3" class="descargar" target="_blank">Descargar Certificado</a>
+         </div>
+        </main>  
 <!----------------------------------------Certificados 2026-------------------------------->
 <!-- ---------------- BUSCADOR ---------------- -->
 <section class="separador-img">
@@ -355,9 +315,7 @@ background:rgba(255,255,255,0.15);}
     </div>
 </main>
 <!-- ---------------- FOOTER ---------------- -->
-
 <footer class="footer">
-
     <div class="footer-left">
      Desarrollado por la C.T.E.U.B. © 2026 - Todos los derechos reservados
     </div>
@@ -373,12 +331,15 @@ background:rgba(255,255,255,0.15);}
 
 </footer>
 
-
 <script>
     const certificados=[
         {url:"https://docs.google.com/spreadsheets/d/e/2PACX-1vQBwaV8MukiuNrmX2wh-JUBjmbimI1mgF7adnuMdWxajvQ2-jvvWYi9uKn_EyqZk3kFyYKam8yGq7V_/pub?gid=0&single=true&output=csv",estado:"estado1",link:"link1"},
         {url:"https://docs.google.com/spreadsheets/d/e/2PACX-1vQhNPw-DqY-NEUmbfVz00JBcZnZIHifOaSFF-MQ_BDiT288bcGMXF6-gdj-5j0YPgzVceWil_Qhkk8z/pub?gid=832962079&single=true&output=csv",estado:"estado2",link:"link2"},
-        {url:"https://docs.google.com/spreadsheets/d/e/2PACX-1vSSJjexwsV7Qph7wLj_Y3gBEK4LU_Au7C8a_g2L4uV-GdoDDeff-iFYhG9gVzMhvLOJniaZBmGz7Cie/pub?gid=0&single=true&output=csv",estado:"estado3",link:"link3"}
+        {url:"https://docs.google.com/spreadsheets/d/e/2PACX-1vSSJjexwsV7Qph7wLj_Y3gBEK4LU_Au7C8a_g2L4uV-GdoDDeff-iFYhG9gVzMhvLOJniaZBmGz7Cie/pub?gid=0&single=true&output=csv",estado:"estado3",link:"link3"},
+        {url:"https://docs.google.com/spreadsheets/d/1LwpANUb6wZIRy9IqgJ7AgPnxg7NlC9HyAZXh0_j3bVM/edit?usp=sharing",estado:"estado4",link:"link4"},
+        {url:"https://docs.google.com/spreadsheets/d/1IBriY6fA1iqCuaLEiI3HKfQC2p6izCaMVCUD8HmY0ME/edit?usp=sharing",estado:"estado5",link:"link5"},
+        {url:"https://docs.google.com/spreadsheets/d/1FV5dFFXx6CAVpIHPc6rlNlDrO2gb9cCvGbXELVRjEKU/edit?usp=sharing",estado:"estado6",link:"link6"},
+        {url:"https://docs.google.com/spreadsheets/d/1-4Ixz0D28gGsUetuERm5y61t6Mf6rzSd6yYeLAgBJcc/edit?usp=sharing",estado:"estado7",link:"link7"}
     ];
 
     async function buscar(){
