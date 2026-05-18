@@ -336,11 +336,7 @@ background:rgba(255,255,255,0.15);}
         {url:"https://docs.google.com/spreadsheets/d/e/2PACX-1vQBwaV8MukiuNrmX2wh-JUBjmbimI1mgF7adnuMdWxajvQ2-jvvWYi9uKn_EyqZk3kFyYKam8yGq7V_/pub?gid=0&single=true&output=csv",estado:"estado1",link:"link1"},
         {url:"https://docs.google.com/spreadsheets/d/e/2PACX-1vQhNPw-DqY-NEUmbfVz00JBcZnZIHifOaSFF-MQ_BDiT288bcGMXF6-gdj-5j0YPgzVceWil_Qhkk8z/pub?gid=832962079&single=true&output=csv",estado:"estado2",link:"link2"},
         {url:"https://docs.google.com/spreadsheets/d/e/2PACX-1vSSJjexwsV7Qph7wLj_Y3gBEK4LU_Au7C8a_g2L4uV-GdoDDeff-iFYhG9gVzMhvLOJniaZBmGz7Cie/pub?gid=0&single=true&output=csv",estado:"estado3",link:"link3"},
-        {url:"https://docs.google.com/spreadsheets/d/1LwpANUb6wZIRy9IqgJ7AgPnxg7NlC9HyAZXh0_j3bVM/edit?usp=sharing",estado:"estado4",link:"link4"},
-        {url:"https://docs.google.com/spreadsheets/d/1IBriY6fA1iqCuaLEiI3HKfQC2p6izCaMVCUD8HmY0ME/edit?usp=sharing",estado:"estado5",link:"link5"},
-        {url:"https://docs.google.com/spreadsheets/d/1FV5dFFXx6CAVpIHPc6rlNlDrO2gb9cCvGbXELVRjEKU/edit?usp=sharing",estado:"estado6",link:"link6"},
-        {url:"https://docs.google.com/spreadsheets/d/1-4Ixz0D28gGsUetuERm5y61t6Mf6rzSd6yYeLAgBJcc/edit?usp=sharing",estado:"estado7",link:"link7"}
-    ];
+       ];
 
     async function buscar(){
     let ci=document.getElementById("ci").value.trim();
@@ -430,6 +426,51 @@ document.getElementById(expositor.estado).innerHTML="<span class='error'>Error c
 }
 
 }
-        </script>
+</script>
+
+<script>
+    const certificados=[
+        {url:"https://docs.google.com/spreadsheets/d/1LwpANUb6wZIRy9IqgJ7AgPnxg7NlC9HyAZXh0_j3bVM/edit?usp=sharing",estado:"estado4",link:"link4"},
+        {url:"https://docs.google.com/spreadsheets/d/1IBriY6fA1iqCuaLEiI3HKfQC2p6izCaMVCUD8HmY0ME/edit?usp=sharing",estado:"estado5",link:"link5"},
+        {url:"https://docs.google.com/spreadsheets/d/1FV5dFFXx6CAVpIHPc6rlNlDrO2gb9cCvGbXELVRjEKU/edit?usp=sharing",estado:"estado6",link:"link6"},
+        {url:"https://docs.google.com/spreadsheets/d/1-4Ixz0D28gGsUetuERm5y61t6Mf6rzSd6yYeLAgBJcc/edit?usp=sharing",estado:"estado7",link:"link7"}
+    ];
+
+    async function buscar(){
+    let ci=document.getElementById("RDA").value.trim();
+    if(ci===""){
+    alert("Ingrese su RDA");
+    return;
+    }
+    
+    for(let cert of certificados){
+    document.getElementById(cert.estado).innerHTML="<span class='buscando'>Buscando certificado...</span>";
+    document.getElementById(cert.link).style.display="none";
+
+try{
+    let r=await fetch(cert.url);
+    let data=await r.text();
+    let filas=data.split(/\r?\n/);
+
+    let encontrado=false;
+    for(let i=1;i<filas.length;i++){
+    let c=filas[i].split(",");
+    if(ci===c[0]){
+
+    document.getElementById(cert.estado).innerHTML="<span class='ok'>✔ SI ASISTI</span>";
+    let btn=document.getElementById(cert.link);
+    btn.href=c[1];
+    btn.style.display="inline-block";
+    encontrado=true;
+    break;}
+    }
+
+        if(!encontrado){
+         document.getElementById(cert.estado).innerHTML="<span class='error'>No se encontró certificado</span>";}
+        }catch{
+         document.getElementById(cert.estado).innerHTML="<span class='error'>Error consultando base de datos</span>";}
+         }
+        }
+</script>
     </body>
 </html>
