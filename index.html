@@ -444,9 +444,10 @@
         <button class="tab-btn activo" data-tab="maestros" onclick="cambiarTab('maestros', this)">Talleres 2025</button>
         <button class="tab-btn" data-tab="expositores" onclick="cambiarTab('expositores', this)">Expositores</button>
         <button class="tab-btn" data-tab="rda" onclick="cambiarTab('rda', this)">Talleres 2026</button>
+        <button class="tab-btn" data-tab="rda" onclick="cambiarTab('rda', this)">Estudiantes ESFM-U.A.</button>
       </div>
 
-      <!-- PANEL MAESTROS (2025) -->
+     <!-- PANEL MAESTROS (2025) -->
       <div class="tab-panel activo" id="panel-maestros">
         <div class="buscar-fila">
           <input type="text" id="ci" placeholder="Ingrese su CI">
@@ -573,6 +574,24 @@
             </div>
           </div>
 
+          <!-- PANEL MAESTROS (2025) -->
+     <div class="tab-panel" id="panel-rda">
+        <div class="buscar-fila">
+          <input type="text" id="RDA" placeholder="Ingrese su RDA o CI">
+          <button onclick="buscarRDA()">Buscar</button>
+        </div>
+        <div class="rejilla">
+          <div class="card">
+            <div class="cert-img-wrap"><img src="DesafiosXXI.png" class="cert-img" alt=""></div>
+            <div class="card-cuerpo">
+              <h3>¿Qué voz tiene el pueblo?</h3>
+              <div id="estado13" class="estado"></div>
+              <a id="link13" class="descargar" target="_blank">Descargar Certificado</a>
+            </div>
+          </div>
+
+https://docs.google.com/spreadsheets/d/e/2PACX-1vSGnYrCls4hCIqm0_32L6R-j0Wg8RJUqgJUDbxBye3px8Q-ljz62HsBK39bFKxNz22cUd8HMFxlT9Kr/pub?gid=0&single=true&output=csv
+          
         </div>
       </div>
 
@@ -581,10 +600,13 @@
         <p>¿No encuentras tu certificado? Llena tus datos y solicítalo directamente.</p>
         <a href="https://docs.google.com/forms/d/e/1FAIpQLSeaYzjUbMMd8ETxavg0eYWyxqnN3s9t7lXDws-QNlSY5qyHaA/viewform?usp=dialog" target="_blank" class="btn-solicitud">Solicitar certificado</a>
       </div>
-
-    </div>
+      </div>
   </section>
 
+
+
+
+  
   <!-- ---------------- BLOQUE 2: CONFERENCIAS INTERNACIONALES ---------------- -->
   <section class="internacional" id="internacional">
     <div class="internacional-contenido">
