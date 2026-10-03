@@ -256,7 +256,7 @@ main{max-width:1080px;margin:0 auto;padding:0 clamp(20px,5vw,40px)}
       <!-- PANEL ESTUDIANTES ESFM-U.A. -->
       <div class="tab-panel" id="panel-esfm">
         <div class="buscar-fila">
-          <input type="text" id="ciESFM" placeholder="Ingrese su CI">
+          <input type="text" id="ciESFM" placeholder="Ingrese su RDA o CI">
           <button onclick="buscarESFM()">Buscar</button>
         </div>
         <div class="rejilla">
@@ -324,17 +324,23 @@ main{max-width:1080px;margin:0 auto;padding:0 clamp(20px,5vw,40px)}
     document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('activo'));
     btn.classList.add('activo');
     document.getElementById('panel-' + nombre).classList.add('activo');
+    // limpia resultados previos para no mezclar datos entre pestañas
+    document.querySelectorAll('.estado').forEach(e => e.innerHTML = '');
+    document.querySelectorAll('.descargar').forEach(a => a.style.display = 'none');
   }
 
   // ---------- Función común: busca un valor en el CSV y devuelve el link (o null) ----------
-  async function consultarCSV(url, valor){
+  async function consultarCSV(url, valor, colCI = 0, colLink = 1){
     const r = await fetch(url);
+    if(!r.ok){ throw new Error("HTTP " + r.status + " al leer " + url); }
     const data = await r.text();
+    if(data.trim().startsWith("<")){ throw new Error("La hoja no está publicada como CSV: " + url); }
     const filas = data.split(/\r?\n/);
     for(let i = 1; i < filas.length; i++){
-      const c = filas[i].split(",");
-      if(valor === (c[0] || "").trim()){
-        return (c[1] || "").trim();
+      const c = filas[i].split(",").map(x => x.replace(/^"|"$/g, "").trim());
+      // compara SOLO la columna indicada para esta hoja
+      if(c[colCI] === valor){
+        return c[colLink] || "";
       }
     }
     return null;
@@ -348,7 +354,7 @@ main{max-width:1080px;margin:0 auto;padding:0 clamp(20px,5vw,40px)}
       estado.innerHTML = "<span class='buscando'>Buscando certificado...</span>";
       btn.style.display = "none";
       try{
-        const link = await consultarCSV(cert.url, valor);
+        const link = await consultarCSV(cert.url, valor, cert.colCI, cert.colLink);
         if(link !== null){
           estado.innerHTML = "<span class='ok'>✔ Si asististe</span>";
           btn.href = link;
@@ -356,7 +362,8 @@ main{max-width:1080px;margin:0 auto;padding:0 clamp(20px,5vw,40px)}
         }else{
           estado.innerHTML = "<span class='error'>No se encontró certificado</span>";
         }
-      }catch{
+      }catch(e){
+        console.error("Error en búsqueda:", e);
         estado.innerHTML = "<span class='error'>Error consultando base de datos</span>";
       }
     }
@@ -364,9 +371,9 @@ main{max-width:1080px;margin:0 auto;padding:0 clamp(20px,5vw,40px)}
 
   // ---------- Talleres 2025 ----------
   const certificados = [
-    {url:"https://docs.google.com/spreadsheets/d/e/2PACX-1vQBwaV8MukiuNrmX2wh-JUBjmbimI1mgF7adnuMdWxajvQ2-jvvWYi9uKn_EyqZk3kFyYKam8yGq7V_/pub?gid=0&single=true&output=csv",estado:"estado1",link:"link1"},
-    {url:"https://docs.google.com/spreadsheets/d/e/2PACX-1vQhNPw-DqY-NEUmbfVz00JBcZnZIHifOaSFF-MQ_BDiT288bcGMXF6-gdj-5j0YPgzVceWil_Qhkk8z/pub?gid=832962079&single=true&output=csv",estado:"estado2",link:"link2"},
-    {url:"https://docs.google.com/spreadsheets/d/e/2PACX-1vSSJjexwsV7Qph7wLj_Y3gBEK4LU_Au7C8a_g2L4uV-GdoDDeff-iFYhG9gVzMhvLOJniaZBmGz7Cie/pub?gid=0&single=true&output=csv",estado:"estado3",link:"link3"},
+    {url:"https://docs.google.com/spreadsheets/d/e/2PACX-1vQBwaV8MukiuNrmX2wh-JUBjmbimI1mgF7adnuMdWxajvQ2-jvvWYi9uKn_EyqZk3kFyYKam8yGq7V_/pub?gid=0&single=true&output=csv",colCI:0,colLink:1,estado:"estado1",link:"link1"},
+    {url:"https://docs.google.com/spreadsheets/d/e/2PACX-1vQhNPw-DqY-NEUmbfVz00JBcZnZIHifOaSFF-MQ_BDiT288bcGMXF6-gdj-5j0YPgzVceWil_Qhkk8z/pub?gid=832962079&single=true&output=csv",colCI:0,colLink:1,estado:"estado2",link:"link2"},
+    {url:"https://docs.google.com/spreadsheets/d/e/2PACX-1vSSJjexwsV7Qph7wLj_Y3gBEK4LU_Au7C8a_g2L4uV-GdoDDeff-iFYhG9gVzMhvLOJniaZBmGz7Cie/pub?gid=0&single=true&output=csv",colCI:0,colLink:1,estado:"estado3",link:"link3"},
   ];
 
   function buscar(){
@@ -376,8 +383,11 @@ main{max-width:1080px;margin:0 auto;padding:0 clamp(20px,5vw,40px)}
   }
 
   // ---------- Estudiantes ESFM-U.A. ----------
+  // 🔑 Hoja EXCLUSIVA de estudiantes ESFM-U.A.
+  // colCI / colLink = número de columna (0 = A, 1 = B, 2 = C...). Ajústalo según tu hoja.
   const certificadosESFM = [
-    {url:"https://docs.google.com/spreadsheets/d/e/2PACX-1vSGnYrCls4hCIqm0_32L6R-j0Wg8RJUqgJUDbxBye3px8Q-ljz62HsBK39bFKxNz22cUd8HMFxlT9Kr/pub?gid=0&single=true&output=csv",colCI:0, colLink:1, estado:"estado13", link:"link13"},
+    {url:"https://docs.google.com/spreadsheets/d/e/2PACX-1vSGnYrCls4hCIqm0_32L6R-j0Wg8RJUqgJUDbxBye3px8Q-ljz62HsBK39bFKxNz22cUd8HMFxlT9Kr/pub?gid=0&single=true&output=csv",
+     colCI:0, colLink:1, estado:"estado13", link:"link13"},
   ];
 
   function buscarESFM(){
@@ -415,15 +425,15 @@ main{max-width:1080px;margin:0 auto;padding:0 clamp(20px,5vw,40px)}
 
   // ---------- Talleres 2026 / RDA ----------
   const certificadosRDA = [
-    {url:"https://docs.google.com/spreadsheets/d/e/2PACX-1vRNMLcls1uBSVuEpDvFT-H9gwb8P1YT-GYtHdebMxPN8__mCoG88YWc6uAW8ckaxaMxU0nE5GAPDCql/pub?gid=0&single=true&output=csv",estado:"estado4",link:"link4"},
-    {url:"https://docs.google.com/spreadsheets/d/e/2PACX-1vTLC3DF7G4edfd3xk-rutdebcQgEWUzAN1BqJPrYoFaJ7JOx3zcovaOpyjZJcH9oippRwJGIgn403_M/pub?gid=0&single=true&output=csv",estado:"estado5",link:"link5"},
-    {url:"https://docs.google.com/spreadsheets/d/e/2PACX-1vRxD0U8TK1IJcQwtwzKr2k3Nr5PFiv1NYjnPzkSBJ0iuFV9fH0ZlXkWzU0pekEzwXexnv_8gGTWZSPu/pub?gid=0&single=true&output=csv",estado:"estado6",link:"link6"},
-    {url:"https://docs.google.com/spreadsheets/d/e/2PACX-1vQ6wJd8IMtCmq-IRSwOU6yEmIWQp4ph3oGF5bozY8fC0tQ3DpOTEvsuY9xeVehFWXkvxpGfpCNAMiB_/pub?gid=0&single=true&output=csv",estado:"estado7",link:"link7"},
-    {url:"https://docs.google.com/spreadsheets/d/e/2PACX-1vQfs2_ZLCYL2eSDrCfdLcbLOYFs3UcY3TuK0CeoEtQrwV1zk8hDzEjPlSONpZOODj_zmsdtGKFjRrvl/pub?gid=0&single=true&output=csv",estado:"estado8",link:"link8"},
-    {url:"https://docs.google.com/spreadsheets/d/e/2PACX-1vTmWvP-HUmvZDxS0ytpAsXYQxQEc-oWCi7FU3rk9OyJGTrHbetUdRG7nYRrkr-3U7vTipUzDb7R9Ity/pub?gid=0&single=true&output=csv",estado:"estado9",link:"link9"},
-    {url:"https://docs.google.com/spreadsheets/d/e/2PACX-1vTUvEtZB1GHz4ojnifLRBiZOSFCoVzFKt4V2zLqEm-IsiABATsarPTPgu23T9iznDqrr9Hb45EWuTK5/pub?gid=0&single=true&output=csv",estado:"estado10",link:"link10"},
-    {url:"https://docs.google.com/spreadsheets/d/e/2PACX-1vQPTL0lWy9b_4IZ_uQAu7rp_5gHnu-_D3BRrCy2RO4JrHSp7TikxmtUQ24hkltqIvUrONSHCFGFMIDr/pub?gid=0&single=true&output=csv",estado:"estado11",link:"link11"},
-    {url:"https://docs.google.com/spreadsheets/d/e/2PACX-1vTYZIPsBVdg_gNRci6be0Zu2Bsf1ltXdMv7T6fDziFoND3amey44DqwlIYvQAmSVEZrME9NJ6bjlqhu/pub?gid=0&single=true&output=csv",estado:"estado12",link:"link12"},
+    {url:"https://docs.google.com/spreadsheets/d/e/2PACX-1vRNMLcls1uBSVuEpDvFT-H9gwb8P1YT-GYtHdebMxPN8__mCoG88YWc6uAW8ckaxaMxU0nE5GAPDCql/pub?gid=0&single=true&output=csv",colCI:0,colLink:1,estado:"estado4",link:"link4"},
+    {url:"https://docs.google.com/spreadsheets/d/e/2PACX-1vTLC3DF7G4edfd3xk-rutdebcQgEWUzAN1BqJPrYoFaJ7JOx3zcovaOpyjZJcH9oippRwJGIgn403_M/pub?gid=0&single=true&output=csv",colCI:0,colLink:1,estado:"estado5",link:"link5"},
+    {url:"https://docs.google.com/spreadsheets/d/e/2PACX-1vRxD0U8TK1IJcQwtwzKr2k3Nr5PFiv1NYjnPzkSBJ0iuFV9fH0ZlXkWzU0pekEzwXexnv_8gGTWZSPu/pub?gid=0&single=true&output=csv",colCI:0,colLink:1,estado:"estado6",link:"link6"},
+    {url:"https://docs.google.com/spreadsheets/d/e/2PACX-1vQ6wJd8IMtCmq-IRSwOU6yEmIWQp4ph3oGF5bozY8fC0tQ3DpOTEvsuY9xeVehFWXkvxpGfpCNAMiB_/pub?gid=0&single=true&output=csv",colCI:0,colLink:1,estado:"estado7",link:"link7"},
+    {url:"https://docs.google.com/spreadsheets/d/e/2PACX-1vQfs2_ZLCYL2eSDrCfdLcbLOYFs3UcY3TuK0CeoEtQrwV1zk8hDzEjPlSONpZOODj_zmsdtGKFjRrvl/pub?gid=0&single=true&output=csv",colCI:0,colLink:1,estado:"estado8",link:"link8"},
+    {url:"https://docs.google.com/spreadsheets/d/e/2PACX-1vTmWvP-HUmvZDxS0ytpAsXYQxQEc-oWCi7FU3rk9OyJGTrHbetUdRG7nYRrkr-3U7vTipUzDb7R9Ity/pub?gid=0&single=true&output=csv",colCI:0,colLink:1,estado:"estado9",link:"link9"},
+    {url:"https://docs.google.com/spreadsheets/d/e/2PACX-1vTUvEtZB1GHz4ojnifLRBiZOSFCoVzFKt4V2zLqEm-IsiABATsarPTPgu23T9iznDqrr9Hb45EWuTK5/pub?gid=0&single=true&output=csv",colCI:0,colLink:1,estado:"estado10",link:"link10"},
+    {url:"https://docs.google.com/spreadsheets/d/e/2PACX-1vQPTL0lWy9b_4IZ_uQAu7rp_5gHnu-_D3BRrCy2RO4JrHSp7TikxmtUQ24hkltqIvUrONSHCFGFMIDr/pub?gid=0&single=true&output=csv",colCI:0,colLink:1,estado:"estado11",link:"link11"},
+    {url:"https://docs.google.com/spreadsheets/d/e/2PACX-1vTYZIPsBVdg_gNRci6be0Zu2Bsf1ltXdMv7T6fDziFoND3amey44DqwlIYvQAmSVEZrME9NJ6bjlqhu/pub?gid=0&single=true&output=csv",colCI:0,colLink:1,estado:"estado12",link:"link12"},
   ];
 
   function buscarRDA(){
