@@ -264,8 +264,8 @@ main{max-width:1080px;margin:0 auto;padding:0 clamp(20px,5vw,40px)}
             <div class="cert-img-wrap"><img src="DesafiosXXI.png" class="cert-img" alt=""></div>
             <div class="card-cuerpo">
               <h3>Desafíos del Siglo XXI</h3>
-              <div id="estado13" class="estado"></div>
-              <a id="link13" class="descargar" target="_blank" rel="noopener">Descargar Certificado</a>
+              <div id="estadoESFM" class="estado"></div>
+              <a id="estadoESFM" class="descargar" target="_blank" rel="noopener">Descargar Certificado</a>
             </div>
           </div>
         </div>
@@ -393,7 +393,7 @@ main{max-width:1080px;margin:0 auto;padding:0 clamp(20px,5vw,40px)}
   function buscarESFM(){
     const ci = document.getElementById("ciESFM").value.trim();
     if(ci === ""){ alert("Ingrese su CI"); return; }
-    buscarEnLista(ci, certificadosESFM);
+    buscarEnLista(certificadosESFM, ci);
   }
 
   // ---------- Expositores ----------
