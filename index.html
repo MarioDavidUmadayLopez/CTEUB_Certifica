@@ -393,7 +393,7 @@ main{max-width:1080px;margin:0 auto;padding:0 clamp(20px,5vw,40px)}
   function buscarESFM(){
     const ci = document.getElementById("ciESFM").value.trim();
     if(ci === ""){ alert("Ingrese su CI"); return; }
-    buscarEnLista(certificadosESFM, ci);
+    buscarEnLista(ci, certificadosESFM);
   }
 
   // ---------- Expositores ----------
