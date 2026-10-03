@@ -256,7 +256,7 @@ main{max-width:1080px;margin:0 auto;padding:0 clamp(20px,5vw,40px)}
       <!-- PANEL ESTUDIANTES ESFM-U.A. -->
       <div class="tab-panel" id="panel-esfm">
         <div class="buscar-fila">
-          <input type="text" id="ciESFM" placeholder="Ingrese su RDA o CI">
+          <input type="text" id="ciESFM" placeholder="Ingrese su CI">
           <button onclick="buscarESFM()">Buscar</button>
         </div>
         <div class="rejilla">
@@ -382,7 +382,7 @@ main{max-width:1080px;margin:0 auto;padding:0 clamp(20px,5vw,40px)}
 
   function buscarESFM(){
     const ci = document.getElementById("ciESFM").value.trim();
-    if(ci === ""){ alert("Ingrese su RDA o CI"); return; }
+    if(ci === ""){ alert("Ingrese su CI"); return; }
     buscarEnLista(certificadosESFM, ci);
   }
 
