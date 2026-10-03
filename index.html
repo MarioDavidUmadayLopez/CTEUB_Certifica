@@ -256,7 +256,7 @@ main{max-width:1080px;margin:0 auto;padding:0 clamp(20px,5vw,40px)}
       <!-- PANEL ESTUDIANTES ESFM-U.A. -->
       <div class="tab-panel" id="panel-esfm">
         <div class="buscar-fila">
-          <input type="text" id="ciESFM" placeholder="Ingrese su RDA o CI">
+          <input type="text" id="ciESFM" placeholder="Ingrese su CI">
           <button onclick="buscarESFM()">Buscar</button>
         </div>
         <div class="rejilla">
@@ -285,8 +285,8 @@ main{max-width:1080px;margin:0 auto;padding:0 clamp(20px,5vw,40px)}
   <section class="internacional" id="internacional">
     <div class="internacional-contenido">
       <p class="eyebrow">Conferencias Internacionales</p>
-      <h2>Congreso Internacional: Desafíos del Siglo XXI</h2>
-      <p class="desc">Está por comenzar este sábado 28 de septiembre.</p>
+      <h2>Congreso Internacional: Liderazgo Administrativo</h2>
+      <p class="desc">Está por comenzar este sábado 03 de octubre.</p>
 
       <div class="formularios-intl">
         <a href="https://forms.gle/PqR9K6HnAyjpzaG28" target="_blank" rel="noopener" class="btn-outline-noche">Formulario para Maestros Normalistas</a>
@@ -387,7 +387,7 @@ main{max-width:1080px;margin:0 auto;padding:0 clamp(20px,5vw,40px)}
   // colCI / colLink = número de columna (0 = A, 1 = B, 2 = C...). Ajústalo según tu hoja.
   const certificadosESFM = [
     {url:"https://docs.google.com/spreadsheets/d/e/2PACX-1vSGnYrCls4hCIqm0_32L6R-j0Wg8RJUqgJUDbxBye3px8Q-ljz62HsBK39bFKxNz22cUd8HMFxlT9Kr/pub?gid=0&single=true&output=csv",
-     colCI:0, colLink:1, estado:"estadoESFM", link:"linkESFM"},
+     estado:"estadoESFM", link:"linkESFM"},
   ];
 
   function buscarESFM(){
