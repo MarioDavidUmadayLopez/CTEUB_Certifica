@@ -1,423 +1,111 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Certificados · C.T.E.U.B.</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,600;8..60,700&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
-  <style>
-    :root{
-      --tinta:#1C2333;
-      --papel:#F7F5F0;
-      --papel-borde:#E4E0D6;
-      --vino:#7A1F35;
-      --vino-oscuro:#5C1728;
-      --oro:#B8912E;
-      --verde-ok:#2F7A4F;
-      --rojo-error:#B23A3A;
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Certificados · C.T.E.U.B.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,600;8..60,700&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+<style>
+:root{
+  --tinta:#1C2333; --papel:#F7F5F0; --papel-borde:#E4E0D6;
+  --vino:#7A1F35; --vino-oscuro:#5C1728; --oro:#B8912E;
+  --verde-ok:#2F7A4F; --rojo-error:#B23A3A;
+  --noche:#0E1526; --noche-2:#161F36; --oro-noche:#D4AF5A;
+  --serif:"Source Serif 4",Georgia,serif; --sans:"Work Sans",Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:var(--sans);background:var(--papel);color:var(--tinta);line-height:1.5}
+h1,h2,h3{font-family:var(--serif);font-weight:600;margin:0}
+a{color:inherit}
+img{max-width:100%;display:block}
+:focus-visible{outline:3px solid var(--oro);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 
-      --noche:#0E1526;
-      --noche-2:#161F36;
-      --oro-noche:#D4AF5A;
+/* HERO */
+.hero{position:relative;height:clamp(260px,40vw,440px);overflow:hidden}
+.hero img{width:100%;height:100%;object-fit:cover}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(14,21,38,.15) 0%,rgba(14,21,38,.75) 100%)}
+.hero-texto{position:absolute;left:0;right:0;bottom:0;padding:32px clamp(20px,5vw,64px);color:#fff;z-index:1}
+.hero-texto p{margin:0 0 6px;font-size:14px;letter-spacing:.03em;color:#E7D9B8}
+.hero-texto h1{font-size:clamp(26px,4vw,42px);color:#fff;max-width:720px}
+main{max-width:1080px;margin:0 auto;padding:0 clamp(20px,5vw,40px)}
 
-      --serif: "Source Serif 4", Georgia, serif;
-      --sans: "Work Sans", Arial, sans-serif;
-    }
+/* BUSCADOR */
+.bloque-buscador{margin-top:-46px;position:relative;z-index:2}
+.panel-buscador{background:#fff;border:1px solid var(--papel-borde);border-radius:14px;box-shadow:0 18px 40px rgba(14,21,38,.12);padding:clamp(20px,4vw,36px)}
+.tabs{display:flex;gap:4px;border-bottom:1px solid var(--papel-borde);margin-bottom:28px;flex-wrap:wrap}
+.tab-btn{border:none;background:none;font-family:var(--sans);font-size:15px;font-weight:600;color:#6B7080;padding:12px 6px;margin-right:22px;cursor:pointer;border-bottom:2px solid transparent;transition:color .2s,border-color .2s}
+.tab-btn.activo{color:var(--vino);border-bottom-color:var(--vino)}
+.tab-panel{display:none}
+.tab-panel.activo{display:block;animation:aparecer .35s ease}
+@keyframes aparecer{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
 
-  *{ box-sizing:border-box; }
-  html{ scroll-behavior:smooth; }
-  body{
-    margin:0;
-    font-family:var(--sans);
-    background:var(--papel);
-    color:var(--tinta);
-    line-height:1.5;
-  }
-  h1,h2,h3{ font-family:var(--serif); font-weight:600; margin:0; }
-  a{ color:inherit; }
-  img{ max-width:100%; display:block; }
+.buscar-fila{display:flex;gap:12px;max-width:460px;margin-bottom:28px;flex-wrap:wrap}
+.buscar-fila input{flex:1;min-width:200px;padding:12px 14px;border-radius:8px;border:1px solid #D3D0C4;font-size:15px;font-family:var(--sans);transition:border-color .2s,box-shadow .2s}
+.buscar-fila input:focus{border-color:var(--vino);box-shadow:0 0 0 3px rgba(122,31,53,.12)}
+.buscar-fila button{padding:12px 22px;border:none;border-radius:8px;background:var(--vino);color:#fff;font-weight:600;font-size:15px;cursor:pointer;transition:background .2s,transform .15s}
+.buscar-fila button:hover{background:var(--vino-oscuro);transform:translateY(-1px)}
+.buscar-fila button:active{transform:translateY(0)}
 
-  :focus-visible{
-    outline:3px solid var(--oro);
-    outline-offset:2px;
-  }
+.rejilla{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:26px}
+.card{border:1px solid var(--papel-borde);border-radius:14px;overflow:hidden;background:#fff;transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease}
+.card:hover{transform:translateY(-6px);box-shadow:0 16px 32px rgba(28,35,51,.14);border-color:#D8C9A3}
+.card .cert-img-wrap{overflow:hidden}
+.card img.cert-img{height:160px;width:100%;object-fit:cover;transition:transform .4s ease}
+.card:hover img.cert-img{transform:scale(1.06)}
+.card-cuerpo{padding:18px 18px 20px}
+.card-cuerpo h3{font-size:16px;font-weight:600;font-family:var(--sans);line-height:1.35;margin-bottom:12px;min-height:44px}
+.estado{font-size:14px;font-weight:600;min-height:20px}
+.estado .ok{color:var(--verde-ok)}
+.estado .error{color:var(--rojo-error)}
+.estado .buscando{color:#8A8D97;font-weight:400}
+.descargar{display:none;margin-top:12px;padding:9px 16px;background:var(--verde-ok);color:#fff;text-decoration:none;border-radius:7px;font-weight:600;font-size:14px;transition:background .2s,transform .15s}
+.descargar:hover{background:#256640;transform:translateY(-1px)}
 
-  @media (prefers-reduced-motion: reduce){
-    *{ animation:none !important; transition:none !important; }
-  }
+.solicitud-inline{margin-top:32px;padding-top:26px;border-top:1px dashed var(--papel-borde);display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.solicitud-inline p{margin:0;font-size:14px;color:#565A66}
+.btn-solicitud{padding:10px 18px;background:#fff;border:1.5px solid var(--vino);color:var(--vino);text-decoration:none;border-radius:8px;font-weight:600;font-size:14px;white-space:nowrap;transition:background .2s,color .2s,transform .15s}
+.btn-solicitud:hover{background:var(--vino);color:#fff;transform:translateY(-1px)}
 
-  /* ------------------ BANNER HERO ------------------ */
-  .hero{
-    position:relative;
-    height:clamp(260px, 40vw, 440px);
-    overflow:hidden;  }
-  .hero img{
-    width:100%; height:100%; object-fit:cover;  }
-  .hero::after{
-    content:"";
-    position:absolute; inset:0;
-    background:linear-gradient(180deg, rgba(14,21,38,0.15) 0%, rgba(14,21,38,0.75) 100%);  }
-  .hero-texto{
-    position:absolute; left:0; right:0; bottom:0;
-    padding:32px clamp(20px,5vw,64px);
-    color:#fff;  }
-  .hero-texto p{
-    margin:0 0 6px;
-    font-size:14px;
-    letter-spacing:0.03em;
-    color:#E7D9B8;  }
-  .hero-texto h1{
-    font-size:clamp(26px, 4vw, 42px);
-    color:#fff;
-    max-width:720px;  }
+/* INTERNACIONAL */
+.internacional{margin-top:64px;background:radial-gradient(120% 120% at 15% 0%,var(--noche-2) 0%,var(--noche) 60%);border-radius:18px;padding:clamp(32px,6vw,64px);color:#EDEBE4;position:relative;overflow:hidden}
+.internacional::before{content:"";position:absolute;top:-40%;right:-10%;width:420px;height:420px;border:1px solid rgba(212,175,90,.25);border-radius:50%}
+.internacional::after{content:"";position:absolute;bottom:-30%;right:8%;width:280px;height:280px;border:1px solid rgba(212,175,90,.15);border-radius:50%}
+.internacional-contenido{position:relative;max-width:640px}
+.internacional p.eyebrow{color:var(--oro-noche);font-size:14px;margin:0 0 10px;font-weight:500}
+.internacional h2{font-size:clamp(26px,3.4vw,36px);color:#fff;margin-bottom:14px}
+.internacional .desc{color:#C7C6C0;font-size:15px;margin-bottom:28px;max-width:520px}
+.formularios-intl{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:36px}
+.btn-outline-noche{padding:11px 20px;border:1.5px solid var(--oro-noche);color:var(--oro-noche);background:rgba(212,175,90,.06);text-decoration:none;border-radius:8px;font-weight:600;font-size:14px;white-space:nowrap;transition:background .2s,color .2s,transform .15s}
+.btn-outline-noche:hover{background:var(--oro-noche);color:#1C1400;transform:translateY(-1px)}
+.buscar-internacional{display:flex;gap:12px;flex-wrap:wrap;max-width:460px}
+.buscar-internacional input{flex:1;min-width:200px;padding:13px 16px;border-radius:8px;border:1px solid rgba(237,235,228,.25);background:rgba(255,255,255,.06);color:#fff;font-size:15px;font-family:var(--sans);transition:border-color .2s,box-shadow .2s}
+.buscar-internacional input::placeholder{color:#9A9C9C}
+.buscar-internacional input:focus{border-color:var(--oro-noche);box-shadow:0 0 0 3px rgba(212,175,90,.18)}
+.buscar-internacional button{padding:13px 24px;border:none;border-radius:8px;background:var(--oro-noche);color:#1C1400;font-weight:700;font-size:15px;cursor:pointer;transition:background .2s,transform .15s}
+.buscar-internacional button:hover{background:#E4C374;transform:translateY(-1px)}
+.resultado-intl{margin-top:20px;max-width:460px}
+.resultado-intl .ok-box{background:rgba(47,122,79,.16);border:1px solid rgba(47,122,79,.5);border-radius:10px;padding:16px 18px;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;animation:aparecer .3s ease}
+.resultado-intl .ok-box a{background:var(--verde-ok);color:#fff;text-decoration:none;padding:9px 16px;border-radius:6px;font-weight:600;font-size:14px;white-space:nowrap;transition:background .2s}
+.resultado-intl .ok-box a:hover{background:#256640}
+.resultado-intl .error-box{background:rgba(178,58,58,.16);border:1px solid rgba(178,58,58,.5);border-radius:10px;padding:14px 16px;font-size:14px;color:#F3D2D2;animation:aparecer .3s ease}
 
-  main{ max-width:1080px; margin:0 auto; padding:0 clamp(20px,5vw,40px); }
-
-  /* ------------------ BLOQUE 1: BUSCADOR UNIFICADO ------------------ */
-  .bloque-buscador{
-    margin-top:-46px;
-    position:relative;
-    z-index:2;
-  }
-  .panel-buscador{
-    background:#fff;
-    border:1px solid var(--papel-borde);
-    border-radius:14px;
-    box-shadow:0 18px 40px rgba(14,21,38,0.12);
-    padding:clamp(20px,4vw,36px);
-  }
-  .tabs{
-    display:flex;
-    gap:4px;
-    border-bottom:1px solid var(--papel-borde);
-    margin-bottom:28px;
-    flex-wrap:wrap;
-  }
-  .tab-btn{
-    border:none;
-    background:none;
-    font-family:var(--sans);
-    font-size:15px;
-    font-weight:600;
-    color:#6B7080;
-    padding:12px 6px;
-    margin-right:22px;
-    cursor:pointer;
-    border-bottom:2px solid transparent;
-    transition:color .2s, border-color .2s;
-  }
-  .tab-btn.activo{
-    color:var(--vino);
-    border-bottom-color:var(--vino);
-  }
-
-  .tab-panel{ display:none; }
-  .tab-panel.activo{
-    display:block;
-    animation:aparecer .35s ease;
-  }
-  @keyframes aparecer{
-    from{ opacity:0; transform:translateY(6px); }
-    to{ opacity:1; transform:translateY(0); }
-  }
-
-  .buscar-fila{
-    display:flex;
-    gap:12px;
-    max-width:460px;
-    margin-bottom:28px;
-    flex-wrap:wrap;
-  }
-  .buscar-fila input{
-    flex:1;
-    min-width:200px;
-    padding:12px 14px;
-    border-radius:8px;
-    border:1px solid #D3D0C4;
-    font-size:15px;
-    font-family:var(--sans);
-    transition:border-color .2s, box-shadow .2s;
-  }
-  .buscar-fila input:focus{
-    border-color:var(--vino);
-    box-shadow:0 0 0 3px rgba(122,31,53,0.12);
-  }
-  .buscar-fila button{
-    padding:12px 22px;
-    border:none;
-    border-radius:8px;
-    background:var(--vino);
-    color:#fff;
-    font-weight:600;
-    font-size:15px;
-    cursor:pointer;
-    transition:background .2s, transform .15s;
-  }
-  .buscar-fila button:hover{ background:var(--vino-oscuro); transform:translateY(-1px); }
-  .buscar-fila button:active{ transform:translateY(0); }
-
-  .rejilla{
-    display:grid;
-    grid-template-columns:repeat(auto-fit, minmax(250px,1fr));
-    gap:26px;
-  }
-
-  .card{
-    border:1px solid var(--papel-borde);
-    border-radius:14px;
-    overflow:hidden;
-    background:#fff;
-    transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;
-  }
-  .card:hover{
-    transform:translateY(-6px);
-    box-shadow:0 16px 32px rgba(28,35,51,0.14);
-    border-color:#D8C9A3;
-  }
-  .card .cert-img-wrap{ overflow:hidden; }
-  .card img.cert-img{
-    height:160px;
-    width:100%;
-    object-fit:cover;
-    transition:transform .4s ease;
-  }
-  .card:hover img.cert-img{ transform:scale(1.06); }
-
-  .card-cuerpo{ padding:18px 18px 20px; }
-  .card-cuerpo h3{
-    font-size:16px;
-    font-weight:600;
-    font-family:var(--sans);
-    line-height:1.35;
-    margin-bottom:12px;
-    min-height:44px;
-  }
-
-  .estado{ font-size:14px; font-weight:600; min-height:20px; }
-  .estado .ok{ color:var(--verde-ok); }
-  .estado .error{ color:var(--rojo-error); }
-  .estado .buscando{ color:#8A8D97; font-weight:400; }
-
-  .descargar{
-    display:none;
-    margin-top:12px;
-    padding:9px 16px;
-    background:var(--verde-ok);
-    color:#fff;
-    text-decoration:none;
-    border-radius:7px;
-    font-weight:600;
-    font-size:14px;
-    transition:background .2s, transform .15s;
-  }
-  .descargar:hover{ background:#256640; transform:translateY(-1px); }
-
-  .solicitud-inline{
-    margin-top:32px;
-    padding-top:26px;
-    border-top:1px dashed var(--papel-borde);
-    display:flex;
-    align-items:center;
-    gap:16px;
-    flex-wrap:wrap;
-  }
-  .solicitud-inline p{ margin:0; font-size:14px; color:#565A66; }
-  .btn-solicitud{
-    padding:10px 18px;
-    background:#fff;
-    border:1.5px solid var(--vino);
-    color:var(--vino);
-    text-decoration:none;
-    border-radius:8px;
-    font-weight:600;
-    font-size:14px;
-    white-space:nowrap;
-    transition:background .2s, color .2s, transform .15s;
-  }
-  .btn-solicitud:hover{ background:var(--vino); color:#fff; transform:translateY(-1px); }
-
-  /* ------------------ BLOQUE 2: CONFERENCIAS INTERNACIONALES ------------------ */
-  .internacional{
-    margin-top:64px;
-    background:radial-gradient(120% 120% at 15% 0%, var(--noche-2) 0%, var(--noche) 60%);
-    border-radius:18px;
-    padding:clamp(32px,6vw,64px);
-    color:#EDEBE4;
-    position:relative;
-    overflow:hidden;
-  }
-  .internacional::before{
-    content:"";
-    position:absolute;
-    top:-40%; right:-10%;
-    width:420px; height:420px;
-    border:1px solid rgba(212,175,90,0.25);
-    border-radius:50%;
-  }
-  .internacional::after{
-    content:"";
-    position:absolute;
-    bottom:-30%; right:8%;
-    width:280px; height:280px;
-    border:1px solid rgba(212,175,90,0.15);
-    border-radius:50%;
-  }
-  .internacional-contenido{ position:relative; max-width:640px; }
-  .internacional p.eyebrow{
-    color:var(--oro-noche);
-    font-size:14px;
-    margin:0 0 10px;
-    font-weight:500;
-  }
-  .internacional h2{
-    font-size:clamp(26px,3.4vw,36px);
-    color:#fff;
-    margin-bottom:14px;
-  }
-  .internacional .desc{
-    color:#C7C6C0;
-    font-size:15px;
-    margin-bottom:28px;
-    max-width:520px;
-  }
-
-  .formularios-intl{
-    display:flex;
-    flex-wrap:wrap;
-    gap:14px;
-    margin-bottom:36px;
-  }
-  .btn-outline-noche{
-    padding:11px 20px;
-    border:1.5px solid var(--oro-noche);
-    color:var(--oro-noche);
-    background:rgba(212,175,90,0.06);
-    text-decoration:none;
-    border-radius:8px;
-    font-weight:600;
-    font-size:14px;
-    white-space:nowrap;
-    transition:background .2s, color .2s, transform .15s;
-  }
-  .btn-outline-noche:hover{
-    background:var(--oro-noche);
-    color:#1C1400;
-    transform:translateY(-1px);
-  }
-
-  .buscar-internacional{
-    display:flex;
-    gap:12px;
-    flex-wrap:wrap;
-    max-width:460px;
-  }
-  .buscar-internacional input{
-    flex:1;
-    min-width:200px;
-    padding:13px 16px;
-    border-radius:8px;
-    border:1px solid rgba(237,235,228,0.25);
-    background:rgba(255,255,255,0.06);
-    color:#fff;
-    font-size:15px;
-    font-family:var(--sans);
-    transition:border-color .2s, box-shadow .2s;
-  }
-  .buscar-internacional input::placeholder{ color:#9A9C9C; }
-  .buscar-internacional input:focus{
-    border-color:var(--oro-noche);
-    box-shadow:0 0 0 3px rgba(212,175,90,0.18);
-  }
-  .buscar-internacional button{
-    padding:13px 24px;
-    border:none;
-    border-radius:8px;
-    background:var(--oro-noche);
-    color:#1C1400;
-    font-weight:700;
-    font-size:15px;
-    cursor:pointer;
-    transition:background .2s, transform .15s;
-  }
-  .buscar-internacional button:hover{ background:#E4C374; transform:translateY(-1px); }
-
-  .resultado-intl{ margin-top:20px; max-width:460px; }
-  .resultado-intl .ok-box{
-    background:rgba(47,122,79,0.16);
-    border:1px solid rgba(47,122,79,0.5);
-    border-radius:10px;
-    padding:16px 18px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:14px;
-    flex-wrap:wrap;
-    animation:aparecer .3s ease;
-  }
-  .resultado-intl .ok-box a{
-    background:var(--verde-ok);
-    color:#fff;
-    text-decoration:none;
-    padding:9px 16px;
-    border-radius:6px;
-    font-weight:600;
-    font-size:14px;
-    white-space:nowrap;
-    transition:background .2s;
-  }
-  .resultado-intl .ok-box a:hover{ background:#256640; }
-  .resultado-intl .error-box{
-    background:rgba(178,58,58,0.16);
-    border:1px solid rgba(178,58,58,0.5);
-    border-radius:10px;
-    padding:14px 16px;
-    font-size:14px;
-    color:#F3D2D2;
-    animation:aparecer .3s ease;
-  }
-
-  /* ------------------ FOOTER ------------------ */
-  .footer{
-    margin-top:64px;
-    background:var(--noche);
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    flex-wrap:wrap;
-    gap:12px;
-    padding:20px clamp(20px,5vw,40px);
-    color:#C7C6C0;
-    font-size:14px;
-  }
-  .footer-right a{
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-    width:38px; height:38px;
-    border-radius:50%;
-    background:rgba(255,255,255,0.08);
-    margin-left:10px;
-    font-size:18px;
-    color:#fff;
-    text-decoration:none;
-    transition:.2s;
-  }
-  .footer-right a:hover{ background:rgba(255,255,255,0.16); transform:translateY(-2px); }
-  .bi-facebook{color:#4C8DFF;} .bi-tiktok{color:#fff;} .bi-youtube{color:#FF5C5C;}
-  .bi-telegram{color:#4FB6E0;} .bi-whatsapp{color:#3FCB6E;} .bi-instagram{color:#E28FA0;}
-
-  @media (max-width: 640px){
-    .bloque-buscador{ margin-top:-28px; }
-    .footer{ flex-direction:column; text-align:center; }
-  }
+/* FOOTER */
+.footer{margin-top:64px;background:var(--noche);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;padding:20px clamp(20px,5vw,40px);color:#C7C6C0;font-size:14px}
+.footer-right a{display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.08);margin-left:10px;font-size:18px;color:#fff;text-decoration:none;transition:.2s}
+.footer-right a:hover{background:rgba(255,255,255,.16);transform:translateY(-2px)}
+.bi-facebook{color:#4C8DFF}.bi-tiktok{color:#fff}.bi-youtube{color:#FF5C5C}
+.bi-telegram{color:#4FB6E0}.bi-whatsapp{color:#3FCB6E}.bi-instagram{color:#E28FA0}
+@media (max-width:640px){.bloque-buscador{margin-top:-28px}.footer{flex-direction:column;text-align:center}}
 </style>
 </head>
 <body>
 
-<!-- ---------------- HERO ---------------- -->
+<!-- HERO -->
 <section class="hero">
   <img src="Federaciones.jpeg" alt="Banner institucional C.T.E.U.B.">
   <div class="hero-texto">
@@ -428,18 +116,18 @@
 
 <main>
 
-  <!-- ---------------- BLOQUE 1: BUSCADOR UNIFICADO ---------------- -->
+  <!-- BLOQUE 1: BUSCADOR UNIFICADO -->
   <section class="bloque-buscador">
     <div class="panel-buscador">
 
       <div class="tabs">
-        <button class="tab-btn activo" data-tab="maestros" onclick="cambiarTab('maestros', this)">Talleres 2025</button>
-        <button class="tab-btn" data-tab="expositores" onclick="cambiarTab('expositores', this)">Expositores</button>
-        <button class="tab-btn" data-tab="rda" onclick="cambiarTab('rda', this)">Talleres 2026</button>
-        <button class="tab-btn" data-tab="rda" onclick="cambiarTab('rda', this)">Estudiantes ESFM-U.A.</button>
+        <button class="tab-btn activo" onclick="cambiarTab('maestros', this)">Talleres 2025</button>
+        <button class="tab-btn" onclick="cambiarTab('expositores', this)">Expositores</button>
+        <button class="tab-btn" onclick="cambiarTab('rda', this)">Talleres 2026</button>
+        <button class="tab-btn" onclick="cambiarTab('esfm', this)">Estudiantes ESFM-U.A.</button>
       </div>
 
-     <!-- PANEL MAESTROS (2025) -->
+      <!-- PANEL TALLERES 2025 -->
       <div class="tab-panel activo" id="panel-maestros">
         <div class="buscar-fila">
           <input type="text" id="ci" placeholder="Ingrese su CI">
@@ -451,7 +139,7 @@
             <div class="card-cuerpo">
               <h3>Análisis e Impacto del D.S. 5503</h3>
               <div id="estado1" class="estado"></div>
-              <a id="link1" class="descargar" target="_blank">Descargar Certificado</a>
+              <a id="link1" class="descargar" target="_blank" rel="noopener">Descargar Certificado</a>
             </div>
           </div>
           <div class="card">
@@ -459,7 +147,7 @@
             <div class="card-cuerpo">
               <h3>El Verdadero Rol Sindical</h3>
               <div id="estado2" class="estado"></div>
-              <a id="link2" class="descargar" target="_blank">Descargar Certificado</a>
+              <a id="link2" class="descargar" target="_blank" rel="noopener">Descargar Certificado</a>
             </div>
           </div>
           <div class="card">
@@ -467,7 +155,7 @@
             <div class="card-cuerpo">
               <h3>Frente al D.S. 5503</h3>
               <div id="estado3" class="estado"></div>
-              <a id="link3" class="descargar" target="_blank">Descargar Certificado</a>
+              <a id="link3" class="descargar" target="_blank" rel="noopener">Descargar Certificado</a>
             </div>
           </div>
         </div>
@@ -480,7 +168,7 @@
           <button onclick="buscarExpositor()">Buscar</button>
         </div>
         <div id="estadoExpositor" class="estado"></div>
-        <a id="linkExpositor" class="descargar" target="_blank">Descargar Certificado</a>
+        <a id="linkExpositor" class="descargar" target="_blank" rel="noopener">Descargar Certificado</a>
       </div>
 
       <!-- PANEL TALLERES 2026 (RDA/CI) -->
@@ -495,7 +183,7 @@
             <div class="card-cuerpo">
               <h3>¿Qué voz tiene el pueblo?</h3>
               <div id="estado4" class="estado"></div>
-              <a id="link4" class="descargar" target="_blank">Descargar Certificado</a>
+              <a id="link4" class="descargar" target="_blank" rel="noopener">Descargar Certificado</a>
             </div>
           </div>
           <div class="card">
@@ -503,7 +191,7 @@
             <div class="card-cuerpo">
               <h3>Educación: ¿Derecho o Privatización?</h3>
               <div id="estado5" class="estado"></div>
-              <a id="link5" class="descargar" target="_blank">Descargar Certificado</a>
+              <a id="link5" class="descargar" target="_blank" rel="noopener">Descargar Certificado</a>
             </div>
           </div>
           <div class="card">
@@ -511,7 +199,7 @@
             <div class="card-cuerpo">
               <h3>Impuestos a la Vida: ¿por qué el dinero no alcanza en Bolivia?</h3>
               <div id="estado6" class="estado"></div>
-              <a id="link6" class="descargar" target="_blank">Descargar Certificado</a>
+              <a id="link6" class="descargar" target="_blank" rel="noopener">Descargar Certificado</a>
             </div>
           </div>
           <div class="card">
@@ -519,7 +207,7 @@
             <div class="card-cuerpo">
               <h3>¿Cómo conseguir dólares para combustible?</h3>
               <div id="estado7" class="estado"></div>
-              <a id="link7" class="descargar" target="_blank">Descargar Certificado</a>
+              <a id="link7" class="descargar" target="_blank" rel="noopener">Descargar Certificado</a>
             </div>
           </div>
           <div class="card">
@@ -527,7 +215,7 @@
             <div class="card-cuerpo">
               <h3>Reconocimiento al Educador Urbano 2026</h3>
               <div id="estado8" class="estado"></div>
-              <a id="link8" class="descargar" target="_blank">Descargar Certificado</a>
+              <a id="link8" class="descargar" target="_blank" rel="noopener">Descargar Certificado</a>
             </div>
           </div>
           <div class="card">
@@ -535,42 +223,41 @@
             <div class="card-cuerpo">
               <h3>Rumbo al Examen de Ascenso de Categoría 2026</h3>
               <div id="estado9" class="estado"></div>
-              <a id="link9" class="descargar" target="_blank">Descargar Certificado</a>
+              <a id="link9" class="descargar" target="_blank" rel="noopener">Descargar Certificado</a>
             </div>
           </div>
-          
           <div class="card">
             <div class="cert-img-wrap"><img src="EstrategiasPedagogicas.jpeg" class="cert-img" alt=""></div>
             <div class="card-cuerpo">
               <h3>Estrategias Pedagógicas Inclusivas</h3>
               <div id="estado10" class="estado"></div>
-              <a id="link10" class="descargar" target="_blank">Descargar Certificado</a>
+              <a id="link10" class="descargar" target="_blank" rel="noopener">Descargar Certificado</a>
             </div>
           </div>
-
           <div class="card">
             <div class="cert-img-wrap"><img src="InnovacionEducativa.jpeg" class="cert-img" alt=""></div>
             <div class="card-cuerpo">
               <h3>Conferencia Internacional sobre Innovación Educativa</h3>
               <div id="estado11" class="estado"></div>
-              <a id="link11" class="descargar" target="_blank">Descargar Certificado</a>
+              <a id="link11" class="descargar" target="_blank" rel="noopener">Descargar Certificado</a>
             </div>
           </div>
-
           <div class="card">
             <div class="cert-img-wrap"><img src="DesafiosXXI.png" class="cert-img" alt=""></div>
             <div class="card-cuerpo">
               <h3>Conferencia Internacional sobre Desafíos del Siglo XXI</h3>
               <div id="estado12" class="estado"></div>
-              <a id="link12" class="descargar" target="_blank">Descargar Certificado</a>
+              <a id="link12" class="descargar" target="_blank" rel="noopener">Descargar Certificado</a>
             </div>
           </div>
+        </div>
+      </div>
 
-     <!-- PANEL Estudiantes ESFM -->
-     <div class="tab-panel" id="panel-rda">
+      <!-- PANEL ESTUDIANTES ESFM-U.A. -->
+      <div class="tab-panel" id="panel-esfm">
         <div class="buscar-fila">
-          <input type="text" id="RDA" placeholder="Ingrese su RDA o CI">
-          <button onclick="buscarRDA()">Buscar</button>
+          <input type="text" id="ciESFM" placeholder="Ingrese su RDA o CI">
+          <button onclick="buscarESFM()">Buscar</button>
         </div>
         <div class="rejilla">
           <div class="card">
@@ -578,21 +265,23 @@
             <div class="card-cuerpo">
               <h3>Desafíos del Siglo XXI</h3>
               <div id="estado13" class="estado"></div>
-              <a id="link13" class="descargar" target="_blank">Descargar Certificado</a>
+              <a id="link13" class="descargar" target="_blank" rel="noopener">Descargar Certificado</a>
             </div>
-          </div>  
+          </div>
         </div>
       </div>
 
+      <!-- SOLICITUD (compartida por todas las pestañas) -->
       <div class="solicitud-inline">
         <img src="googleform.webp" alt="" style="width:44px;height:44px;object-fit:cover;border-radius:8px;">
         <p>¿No encuentras tu certificado? Llena tus datos y solicítalo directamente.</p>
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSeaYzjUbMMd8ETxavg0eYWyxqnN3s9t7lXDws-QNlSY5qyHaA/viewform?usp=dialog" target="_blank" class="btn-solicitud">Solicitar certificado</a>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSeaYzjUbMMd8ETxavg0eYWyxqnN3s9t7lXDws-QNlSY5qyHaA/viewform?usp=dialog" target="_blank" rel="noopener" class="btn-solicitud">Solicitar certificado</a>
       </div>
-      </div>
+
+    </div>
   </section>
 
-  <!-- ---------------- BLOQUE 2: CONFERENCIAS INTERNACIONALES ---------------- -->
+  <!-- BLOQUE 2: CONFERENCIAS INTERNACIONALES -->
   <section class="internacional" id="internacional">
     <div class="internacional-contenido">
       <p class="eyebrow">Conferencias Internacionales</p>
@@ -600,8 +289,8 @@
       <p class="desc">Está por comenzar este sábado 28 de septiembre.</p>
 
       <div class="formularios-intl">
-        <a href="https://forms.gle/PqR9K6HnAyjpzaG28" target="_blank" class="btn-outline-noche">Formulario para Maestros Normalistas</a>
-        <a href="https://forms.gle/qGiAfa6vnBAq5uUM8" target="_blank" class="btn-outline-noche">Formulario para Estudiantes ESFM - U.A.</a>
+        <a href="https://forms.gle/PqR9K6HnAyjpzaG28" target="_blank" rel="noopener" class="btn-outline-noche">Formulario para Maestros Normalistas</a>
+        <a href="https://forms.gle/qGiAfa6vnBAq5uUM8" target="_blank" rel="noopener" class="btn-outline-noche">Formulario para Estudiantes ESFM - U.A.</a>
       </div>
 
       <div class="buscar-internacional">
@@ -615,16 +304,16 @@
 
 </main>
 
-<!-- ---------------- FOOTER ---------------- -->
+<!-- FOOTER -->
 <footer class="footer">
   <div class="footer-left">Desarrollado por la C.T.E.U.B. © 2026 — Todos los derechos reservados</div>
   <div class="footer-right">
-    <a href="https://www.facebook.com/cteuboficial/" target="_blank" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
-    <a href="https://www.tiktok.com/@cteubbolivia?lang=es" target="_blank" aria-label="TikTok"><i class="bi bi-tiktok"></i></a>
-    <a href="https://www.youtube.com/@C.T.E.U.B.CONFEDERACION" target="_blank" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
-    <a href="https://www.telegram.com/cteub_bolivia/" target="_blank" aria-label="Telegram"><i class="bi bi-telegram"></i></a>
-    <a href="https://wa.me/59169942970?text=Hola%20C.T.E.U.B.%20quiero%20informaci%C3%B3n" target="_blank" aria-label="WhatsApp"><i class="bi bi-whatsapp"></i></a>
-    <a href="https://www.instagram.com/cteub_bolivia/" target="_blank" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+    <a href="https://www.facebook.com/cteuboficial/" target="_blank" rel="noopener" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+    <a href="https://www.tiktok.com/@cteubbolivia?lang=es" target="_blank" rel="noopener" aria-label="TikTok"><i class="bi bi-tiktok"></i></a>
+    <a href="https://www.youtube.com/@C.T.E.U.B.CONFEDERACION" target="_blank" rel="noopener" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+    <a href="https://t.me/cteub_bolivia" target="_blank" rel="noopener" aria-label="Telegram"><i class="bi bi-telegram"></i></a>
+    <a href="https://wa.me/59169942970?text=Hola%20C.T.E.U.B.%20quiero%20informaci%C3%B3n" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="bi bi-whatsapp"></i></a>
+    <a href="https://www.instagram.com/cteub_bolivia/" target="_blank" rel="noopener" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
   </div>
 </footer>
 
@@ -637,109 +326,94 @@
     document.getElementById('panel-' + nombre).classList.add('activo');
   }
 
-  // ---------- Maestros 2025 (sin cambios en las URLs) ----------
-  const certificados=[
+  // ---------- Función común: busca un valor en el CSV y devuelve el link (o null) ----------
+  async function consultarCSV(url, valor){
+    const r = await fetch(url);
+    const data = await r.text();
+    const filas = data.split(/\r?\n/);
+    for(let i = 1; i < filas.length; i++){
+      const c = filas[i].split(",");
+      if(valor === (c[0] || "").trim()){
+        return (c[1] || "").trim();
+      }
+    }
+    return null;
+  }
+
+  // ---------- Función común: recorre una lista de certificados y actualiza las tarjetas ----------
+  async function buscarEnLista(lista, valor){
+    for(const cert of lista){
+      const estado = document.getElementById(cert.estado);
+      const btn = document.getElementById(cert.link);
+      estado.innerHTML = "<span class='buscando'>Buscando certificado...</span>";
+      btn.style.display = "none";
+      try{
+        const link = await consultarCSV(cert.url, valor);
+        if(link !== null){
+          estado.innerHTML = "<span class='ok'>✔ Si asististe</span>";
+          btn.href = link;
+          btn.style.display = "inline-block";
+        }else{
+          estado.innerHTML = "<span class='error'>No se encontró certificado</span>";
+        }
+      }catch{
+        estado.innerHTML = "<span class='error'>Error consultando base de datos</span>";
+      }
+    }
+  }
+
+  // ---------- Talleres 2025 ----------
+  const certificados = [
     {url:"https://docs.google.com/spreadsheets/d/e/2PACX-1vQBwaV8MukiuNrmX2wh-JUBjmbimI1mgF7adnuMdWxajvQ2-jvvWYi9uKn_EyqZk3kFyYKam8yGq7V_/pub?gid=0&single=true&output=csv",estado:"estado1",link:"link1"},
     {url:"https://docs.google.com/spreadsheets/d/e/2PACX-1vQhNPw-DqY-NEUmbfVz00JBcZnZIHifOaSFF-MQ_BDiT288bcGMXF6-gdj-5j0YPgzVceWil_Qhkk8z/pub?gid=832962079&single=true&output=csv",estado:"estado2",link:"link2"},
     {url:"https://docs.google.com/spreadsheets/d/e/2PACX-1vSSJjexwsV7Qph7wLj_Y3gBEK4LU_Au7C8a_g2L4uV-GdoDDeff-iFYhG9gVzMhvLOJniaZBmGz7Cie/pub?gid=0&single=true&output=csv",estado:"estado3",link:"link3"},
   ];
 
-  async function buscar(){
-    let ci=document.getElementById("ci").value.trim();
-    if(ci===""){ alert("Ingrese su CI"); return; }
-    for(let cert of certificados){
-      document.getElementById(cert.estado).innerHTML="<span class='buscando'>Buscando certificado...</span>";
-      document.getElementById(cert.link).style.display="none";
-      try{
-        let r=await fetch(cert.url);
-        let data=await r.text();
-        let filas=data.split(/\r?\n/);
-        let encontrado=false;
-        for(let i=1;i<filas.length;i++){
-          let c=filas[i].split(",");
-          if(ci===c[0]){
-            document.getElementById(cert.estado).innerHTML="<span class='ok'>✔ Si asististe</span>";
-            let btn=document.getElementById(cert.link);
-            btn.href=c[1];
-            btn.style.display="inline-block";
-            encontrado=true;
-            break;
-          }
-        }
-        if(!encontrado){ document.getElementById(cert.estado).innerHTML="<span class='error'>No se encontró certificado</span>"; }
-      }catch{
-        document.getElementById(cert.estado).innerHTML="<span class='error'>Error consultando base de datos</span>";
-      }
-    }
+  function buscar(){
+    const ci = document.getElementById("ci").value.trim();
+    if(ci === ""){ alert("Ingrese su CI"); return; }
+    buscarEnLista(certificados, ci);
   }
 
-   // ---------- Estudiantes ESFM (sin cambios en las URLs) ----------
-  const certificados=[
+  // ---------- Estudiantes ESFM-U.A. ----------
+  const certificadosESFM = [
     {url:"https://docs.google.com/spreadsheets/d/e/2PACX-1vSGnYrCls4hCIqm0_32L6R-j0Wg8RJUqgJUDbxBye3px8Q-ljz62HsBK39bFKxNz22cUd8HMFxlT9Kr/pub?gid=0&single=true&output=csv",estado:"estado13",link:"link13"},
-    ];
+  ];
 
-  async function buscar(){
-    let ci=document.getElementById("ci").value.trim();
-    if(ci===""){ alert("Ingrese su CI"); return; }
-    for(let cert of certificados){
-      document.getElementById(cert.estado).innerHTML="<span class='buscando'>Buscando certificado...</span>";
-      document.getElementById(cert.link).style.display="none";
-      try{
-        let r=await fetch(cert.url);
-        let data=await r.text();
-        let filas=data.split(/\r?\n/);
-        let encontrado=false;
-        for(let i=1;i<filas.length;i++){
-          let c=filas[i].split(",");
-          if(ci===c[0]){
-            document.getElementById(cert.estado).innerHTML="<span class='ok'>✔ Si asististe</span>";
-            let btn=document.getElementById(cert.link);
-            btn.href=c[1];
-            btn.style.display="inline-block";
-            encontrado=true;
-            break;
-          }
-        }
-        if(!encontrado){ document.getElementById(cert.estado).innerHTML="<span class='error'>No se encontró certificado</span>"; }
-      }catch{
-        document.getElementById(cert.estado).innerHTML="<span class='error'>Error consultando base de datos</span>";
-      }
-    }
+  function buscarESFM(){
+    const ci = document.getElementById("ciESFM").value.trim();
+    if(ci === ""){ alert("Ingrese su RDA o CI"); return; }
+    buscarEnLista(certificadosESFM, ci);
   }
 
-  // ---------- Expositores (sin cambios en la URL) ----------
+  // ---------- Expositores ----------
   const expositor = {
     url:"https://docs.google.com/spreadsheets/d/e/2PACX-1vTpANP1P2QgkW_RG_4FBWcrLjapeje1iVG5NSgzIaRtiyujaQi3ShYJFFntwtJSoZYQfBECG17NXtFo/pub?gid=561352925&single=true&output=csv",
     estado:"estadoExpositor", link:"linkExpositor"
   };
+
   async function buscarExpositor(){
-    let celular=document.getElementById("celular").value.trim();
-    if(celular===""){ alert("Ingrese su número de celular"); return; }
-    document.getElementById(expositor.estado).innerHTML="<span class='buscando'>Buscando certificado...</span>";
-    document.getElementById(expositor.link).style.display="none";
+    const celular = document.getElementById("celular").value.trim();
+    if(celular === ""){ alert("Ingrese su número de celular"); return; }
+    const estado = document.getElementById(expositor.estado);
+    const btn = document.getElementById(expositor.link);
+    estado.innerHTML = "<span class='buscando'>Buscando certificado...</span>";
+    btn.style.display = "none";
     try{
-      let r=await fetch(expositor.url);
-      let data=await r.text();
-      let filas=data.split(/\r?\n/);
-      let encontrado=false;
-      for(let i=1;i<filas.length;i++){
-        let c=filas[i].split(",");
-        if(celular===c[0]){
-          document.getElementById(expositor.estado).innerHTML="<span class='ok'>✔ Certificado encontrado</span>";
-          let btn=document.getElementById(expositor.link);
-          btn.href=c[1];
-          btn.style.display="inline-block";
-          encontrado=true;
-          break;
-        }
+      const link = await consultarCSV(expositor.url, celular);
+      if(link !== null){
+        estado.innerHTML = "<span class='ok'>✔ Certificado encontrado</span>";
+        btn.href = link;
+        btn.style.display = "inline-block";
+      }else{
+        estado.innerHTML = "<span class='error'>No se encontró certificado</span>";
       }
-      if(!encontrado){ document.getElementById(expositor.estado).innerHTML="<span class='error'>No se encontró certificado</span>"; }
     }catch{
-      document.getElementById(expositor.estado).innerHTML="<span class='error'>Error consultando base de datos</span>";
+      estado.innerHTML = "<span class='error'>Error consultando base de datos</span>";
     }
   }
 
-  // ---------- Talleres 2026 / RDA (sin cambios en las URLs) ----------
+  // ---------- Talleres 2026 / RDA ----------
   const certificadosRDA = [
     {url:"https://docs.google.com/spreadsheets/d/e/2PACX-1vRNMLcls1uBSVuEpDvFT-H9gwb8P1YT-GYtHdebMxPN8__mCoG88YWc6uAW8ckaxaMxU0nE5GAPDCql/pub?gid=0&single=true&output=csv",estado:"estado4",link:"link4"},
     {url:"https://docs.google.com/spreadsheets/d/e/2PACX-1vTLC3DF7G4edfd3xk-rutdebcQgEWUzAN1BqJPrYoFaJ7JOx3zcovaOpyjZJcH9oippRwJGIgn403_M/pub?gid=0&single=true&output=csv",estado:"estado5",link:"link5"},
@@ -752,36 +426,13 @@
     {url:"https://docs.google.com/spreadsheets/d/e/2PACX-1vTYZIPsBVdg_gNRci6be0Zu2Bsf1ltXdMv7T6fDziFoND3amey44DqwlIYvQAmSVEZrME9NJ6bjlqhu/pub?gid=0&single=true&output=csv",estado:"estado12",link:"link12"},
   ];
 
-  async function buscarRDA(){
-    let RDA=document.getElementById("RDA").value.trim();
-    if(RDA===""){ alert("Ingrese su RDA"); return; }
-    for(let cert of certificadosRDA){
-      document.getElementById(cert.estado).innerHTML="<span class='buscando'>Buscando certificado...</span>";
-      document.getElementById(cert.link).style.display="none";
-      try{
-        let r=await fetch(cert.url);
-        let data=await r.text();
-        let filas=data.split(/\r?\n/);
-        let encontrado=false;
-        for(let i=1;i<filas.length;i++){
-          let c=filas[i].split(",");
-          if(RDA===c[0]){
-            document.getElementById(cert.estado).innerHTML="<span class='ok'>✔ Si asististe</span>";
-            let btn=document.getElementById(cert.link);
-            btn.href=c[1];
-            btn.style.display="inline-block";
-            encontrado=true;
-            break;
-          }
-        }
-        if(!encontrado){ document.getElementById(cert.estado).innerHTML="<span class='error'>No se encontró certificado</span>"; }
-      }catch{
-        document.getElementById(cert.estado).innerHTML="<span class='error'>Error consultando base de datos</span>";
-      }
-    }
+  function buscarRDA(){
+    const rda = document.getElementById("RDA").value.trim();
+    if(rda === ""){ alert("Ingrese su RDA o CI"); return; }
+    buscarEnLista(certificadosRDA, rda);
   }
 
-  // ---------- NUEVO: Conferencias Internacionales (Congreso Innovación Educativa) ----------
+  // ---------- Conferencias Internacionales ----------
   // 👇 Pega aquí la URL del CSV publicado de tu pestaña CERTDOWNLOADS
   const CSV_URL_INTL = "https://docs.google.com/spreadsheets/d/e/2PACX-XXXXXXX/pub?output=csv";
 
@@ -794,23 +445,14 @@
     }
     resultado.innerHTML = "<span class='estado buscando' style='color:#C7C6C0'>Buscando certificado...</span>";
     try{
-      let r = await fetch(CSV_URL_INTL);
-      let data = await r.text();
-      let filas = data.split(/\r?\n/);
-      let encontrado = false;
-      for(let i=1;i<filas.length;i++){
-        let c = filas[i].split(",");
-        if(ci === (c[0]||"").trim()){
-          resultado.innerHTML = `
-            <div class="ok-box">
-              <span>✔ Certificado encontrado</span>
-              <a href="${c[1]}" target="_blank" rel="noopener">Ver / Descargar</a>
-            </div>`;
-          encontrado = true;
-          break;
-        }
-      }
-      if(!encontrado){
+      const link = await consultarCSV(CSV_URL_INTL, ci);
+      if(link !== null){
+        resultado.innerHTML = `
+          <div class="ok-box">
+            <span>✔ Certificado encontrado</span>
+            <a href="${link}" target="_blank" rel="noopener">Ver / Descargar</a>
+          </div>`;
+      }else{
         resultado.innerHTML = "<div class='error-box'>No encontramos un certificado con ese CI. Verifica el número o contacta al organizador.</div>";
       }
     }catch{
