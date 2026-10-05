@@ -402,7 +402,7 @@
   function buscarESFM(){
     const ci = document.getElementById("ciESFM").value.trim();
     if(ci === ""){ alert("Ingrese su CI"); return; }
-    buscarEnLista(certificadosESFM, ci);
+    buscarEnLista(ci, certificadosESFM);
   }
 
   // ---------- Expositores ----------
